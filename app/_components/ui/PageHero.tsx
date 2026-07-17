@@ -1,0 +1,26 @@
+interface PageHeroProps {
+  en?: string;
+  title: string;
+  description?: string;
+}
+
+export default function PageHero({ en, title, description }: PageHeroProps) {
+  return (
+    <section className="bg-night flex flex-col items-center justify-center text-center py-32 px-6 min-h-[40vh]">
+      {en && (
+        <p className="font-serif text-gold text-xs tracking-[0.35em] mb-5">
+          {en}
+        </p>
+      )}
+      <h1 className="font-serif-ko text-canvas text-5xl md:text-6xl font-light tracking-tight leading-tight">
+        {title}
+      </h1>
+      {description && (
+        <p className="mt-5 text-dim text-sm md:text-base leading-relaxed max-w-md">
+          {description}
+        </p>
+      )}
+      <div className="mt-8 w-10 h-px bg-gold" />
+    </section>
+  );
+}
