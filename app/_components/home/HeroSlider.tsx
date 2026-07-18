@@ -94,10 +94,10 @@ export default function HeroSlider() {
               transition={{ duration: 0.8, ease: "easeOut" }}
               className="pt-28 md:pt-0 mx-auto md:mx-0 max-w-xl md:max-w-2xl text-center md:text-left [text-shadow:0_2px_14px_rgba(0,0,0,0.4)]"
             >
-              <p className="font-serif shimmer-text text-sm tracking-[0.4em] mb-5">
+              <p className="font-serif text-[#e0c896] text-sm tracking-[0.4em] mb-5">
                 {slides[activeIndex].sub}
               </p>
-              <h1 className="font-serif-ko text-canvas font-light leading-tight tracking-[-0.01em] whitespace-pre-line"
+              <h1 className="font-serif-ko text-canvas font-light leading-tight tracking-[-0.025em] whitespace-pre-line"
                 style={{ fontSize: "clamp(1.6rem, 5.2vw, 4.25rem)" }}
               >
                 {slides[activeIndex].title}

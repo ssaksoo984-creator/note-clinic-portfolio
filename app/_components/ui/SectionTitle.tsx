@@ -14,14 +14,14 @@ export default function SectionTitle({
   return (
     <div className={center ? "text-center" : ""}>
       <p
-        className={`font-serif text-xs tracking-[0.3em] mb-3 ${
-          light ? "text-gold" : "text-gold"
+        className={`font-serif text-sm tracking-[0.3em] mb-3 ${
+          light ? "text-gold" : "text-[#a9824f]"
         }`}
       >
         {en}
       </p>
       <h2
-        className={`font-serif-ko text-3xl md:text-4xl font-light tracking-tight leading-snug ${
+        className={`font-serif-ko text-4xl md:text-5xl font-bold tracking-tight leading-snug ${
           light ? "text-canvas" : "text-ink"
         }`}
       >
