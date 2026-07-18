@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import SectionTitle from "../ui/SectionTitle";
+import ParticleNetwork from "../ui/ParticleNetwork";
 import type { ProcessStep } from "../../_data/process";
 
 interface ProcessSectionProps {
@@ -36,54 +37,8 @@ export default function ProcessSection({
       ref={sectionRef}
       className="relative overflow-hidden py-20 md:py-32 px-6 bg-canvas"
     >
-      {/* 배경 기하학적 패턴 — 얇은 선의 사각형들이 커지고 작아지며 떠다니는 효과 */}
-      <svg
-        aria-hidden
-        viewBox="0 0 1440 900"
-        preserveAspectRatio="xMidYMid slice"
-        className="pointer-events-none absolute inset-0 w-full h-full"
-      >
-        <motion.rect
-          x="60" y="60" width="180" height="180"
-          fill="none" stroke="#c9a96e" strokeOpacity="0.35" strokeWidth="1"
-          vectorEffect="non-scaling-stroke"
-          animate={{ scale: [0.8, 1.15, 0.9, 1], rotate: [4, 14, -4, 4] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          style={{ transformBox: "fill-box", transformOrigin: "50% 50%" }}
-        />
-        <motion.rect
-          x="1160" y="30" width="220" height="220"
-          fill="none" stroke="#c9a96e" strokeOpacity="0.3" strokeWidth="1"
-          vectorEffect="non-scaling-stroke"
-          animate={{ scale: [1, 0.75, 1.1, 1], rotate: [12, -6, 18, 12] }}
-          transition={{ duration: 13, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
-          style={{ transformBox: "fill-box", transformOrigin: "50% 50%" }}
-        />
-        <motion.rect
-          x="20" y="420" width="140" height="140"
-          fill="none" stroke="#c9a96e" strokeOpacity="0.28" strokeWidth="1"
-          vectorEffect="non-scaling-stroke"
-          animate={{ scale: [1, 1.2, 0.85, 1], rotate: [-8, 2, -14, -8] }}
-          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 1.4 }}
-          style={{ transformBox: "fill-box", transformOrigin: "50% 50%" }}
-        />
-        <motion.rect
-          x="1220" y="640" width="200" height="200"
-          fill="none" stroke="#c9a96e" strokeOpacity="0.3" strokeWidth="1"
-          vectorEffect="non-scaling-stroke"
-          animate={{ scale: [0.9, 1.1, 0.7, 0.9], rotate: [6, -12, 10, 6] }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 0.9 }}
-          style={{ transformBox: "fill-box", transformOrigin: "50% 50%" }}
-        />
-        <motion.rect
-          x="620" y="520" width="260" height="260"
-          fill="none" stroke="#c9a96e" strokeOpacity="0.18" strokeWidth="1"
-          vectorEffect="non-scaling-stroke"
-          animate={{ scale: [1, 0.8, 1.15, 1], rotate: [0, 10, -10, 0] }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          style={{ transformBox: "fill-box", transformOrigin: "50% 50%" }}
-        />
-      </svg>
+      {/* 배경 파티클 네트워크 — 점들이 떠다니며 가까워지면 선으로 연결되는 효과 */}
+      <ParticleNetwork />
 
       <div className="relative max-w-[1440px] mx-auto">
         <SectionTitle en={subtitle} ko={title} center />
