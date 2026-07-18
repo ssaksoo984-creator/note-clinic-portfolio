@@ -36,19 +36,54 @@ export default function ProcessSection({
       ref={sectionRef}
       className="relative overflow-hidden py-20 md:py-32 px-6 bg-canvas"
     >
-      {/* 배경 골드 그라데이션 원 — 스크롤 진입 시 드라마틱하게 피어나는 효과 */}
-      <motion.div
+      {/* 배경 기하학적 패턴 — 얇은 선의 사각형들이 커지고 작아지며 떠다니는 효과 */}
+      <svg
         aria-hidden
-        initial={{ scale: 0.02, opacity: 0, rotate: 8 }}
-        whileInView={{ scale: [0.02, 1.2, 1], opacity: [0, 1, 1], rotate: [8, -4, 0] }}
-        viewport={{ once: true, amount: 0.15 }}
-        transition={{ duration: 2.6, times: [0, 0.6, 1], ease: [0.16, 1, 0.3, 1] }}
-        className="pointer-events-none absolute -right-12 top-4 w-[380px] h-[380px] md:-right-24 md:w-[760px] md:h-[760px] rounded-full"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(201,169,110,0.85) 0%, rgba(201,169,110,0.55) 25%, rgba(201,169,110,0.22) 50%, rgba(201,169,110,0) 72%)",
-        }}
-      />
+        viewBox="0 0 1440 900"
+        preserveAspectRatio="xMidYMid slice"
+        className="pointer-events-none absolute inset-0 w-full h-full"
+      >
+        <motion.rect
+          x="60" y="60" width="180" height="180"
+          fill="none" stroke="#c9a96e" strokeOpacity="0.35" strokeWidth="1"
+          vectorEffect="non-scaling-stroke"
+          animate={{ scale: [0.8, 1.15, 0.9, 1], rotate: [4, 14, -4, 4] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          style={{ transformBox: "fill-box", transformOrigin: "50% 50%" }}
+        />
+        <motion.rect
+          x="1160" y="30" width="220" height="220"
+          fill="none" stroke="#c9a96e" strokeOpacity="0.3" strokeWidth="1"
+          vectorEffect="non-scaling-stroke"
+          animate={{ scale: [1, 0.75, 1.1, 1], rotate: [12, -6, 18, 12] }}
+          transition={{ duration: 13, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
+          style={{ transformBox: "fill-box", transformOrigin: "50% 50%" }}
+        />
+        <motion.rect
+          x="20" y="420" width="140" height="140"
+          fill="none" stroke="#c9a96e" strokeOpacity="0.28" strokeWidth="1"
+          vectorEffect="non-scaling-stroke"
+          animate={{ scale: [1, 1.2, 0.85, 1], rotate: [-8, 2, -14, -8] }}
+          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 1.4 }}
+          style={{ transformBox: "fill-box", transformOrigin: "50% 50%" }}
+        />
+        <motion.rect
+          x="1220" y="640" width="200" height="200"
+          fill="none" stroke="#c9a96e" strokeOpacity="0.3" strokeWidth="1"
+          vectorEffect="non-scaling-stroke"
+          animate={{ scale: [0.9, 1.1, 0.7, 0.9], rotate: [6, -12, 10, 6] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 0.9 }}
+          style={{ transformBox: "fill-box", transformOrigin: "50% 50%" }}
+        />
+        <motion.rect
+          x="620" y="520" width="260" height="260"
+          fill="none" stroke="#c9a96e" strokeOpacity="0.18" strokeWidth="1"
+          vectorEffect="non-scaling-stroke"
+          animate={{ scale: [1, 0.8, 1.15, 1], rotate: [0, 10, -10, 0] }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          style={{ transformBox: "fill-box", transformOrigin: "50% 50%" }}
+        />
+      </svg>
 
       <div className="relative max-w-[1440px] mx-auto">
         <SectionTitle en={subtitle} ko={title} center />
@@ -159,10 +194,10 @@ export default function ProcessSection({
                 exit={{ opacity: 0, y: -16 }}
                 transition={{ duration: 0.5 }}
               >
-                <span className="block font-serif text-gold/25 text-[120px] leading-none select-none">
+                <span className="block font-serif text-gold/25 text-[160px] leading-none select-none">
                   {steps[active].step}
                 </span>
-                <h3 className="-mt-8 font-serif-ko text-ink text-2xl md:text-3xl font-light leading-snug mb-4">
+                <h3 className="-mt-10 font-serif-ko text-ink text-2xl md:text-3xl font-bold leading-snug mb-4">
                   {steps[active].title}
                 </h3>
                 <p className="text-dim text-sm md:text-base leading-relaxed max-w-sm">
