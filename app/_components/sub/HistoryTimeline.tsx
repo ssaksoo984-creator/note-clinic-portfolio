@@ -21,7 +21,7 @@ export default function HistoryTimeline({
 }: HistoryTimelineProps) {
   return (
     <section className="py-20 md:py-32 px-6 bg-rule/20">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-[1440px] mx-auto">
         <SectionTitle en={subtitle} ko={title} center />
 
         <div className="mt-16 max-w-2xl mx-auto">

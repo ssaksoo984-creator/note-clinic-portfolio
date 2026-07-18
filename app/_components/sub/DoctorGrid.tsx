@@ -24,7 +24,7 @@ interface DoctorGridProps {
 export default function DoctorGrid({ title, subtitle, doctors }: DoctorGridProps) {
   return (
     <section className="py-20 md:py-32 px-6 bg-canvas">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-[1440px] mx-auto">
         <SectionTitle en={subtitle} ko={title} center />
 
         <div className="mt-16 flex flex-col gap-20 md:gap-28">

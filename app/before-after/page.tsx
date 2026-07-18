@@ -119,7 +119,7 @@ export default function BeforeAfterPage() {
       />
 
       <section className="py-20 md:py-32 px-6 bg-canvas">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-[1440px] mx-auto">
           <BeforeAfterGallery items={items} />
         </div>
       </section>

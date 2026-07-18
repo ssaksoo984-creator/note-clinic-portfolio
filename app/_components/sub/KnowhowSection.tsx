@@ -24,7 +24,7 @@ export default function KnowhowSection({
 }: KnowhowSectionProps) {
   return (
     <section className="py-20 md:py-32 px-6 bg-canvas">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-[1440px] mx-auto">
         <SectionTitle en={subtitle} ko={title} center />
 
         <div

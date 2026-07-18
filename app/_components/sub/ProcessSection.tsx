@@ -17,7 +17,7 @@ export default function ProcessSection({
 }: ProcessSectionProps) {
   return (
     <section className="py-20 md:py-32 px-6 bg-canvas">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-[1440px] mx-auto">
         <SectionTitle en={subtitle} ko={title} center />
 
         <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-6 relative">

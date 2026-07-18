@@ -13,7 +13,7 @@ const hours = [
 export default function LocationSection() {
   return (
     <section className="py-24 px-6 bg-rule/10">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-[1440px] mx-auto">
         <SectionTitle en="LOCATION & CONTACT" ko="오시는 길" />
 
         <div className="mt-14 grid grid-cols-1 lg:grid-cols-2 gap-12">

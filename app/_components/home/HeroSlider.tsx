@@ -11,34 +11,22 @@ import "swiper/css/effect-fade";
 
 const slides = [
   {
-    sub: "PREMIUM PLASTIC SURGERY",
-    title: "완벽한 아름다움을\n위한 선택",
-    desc: "아르떼성형외과와 함께하는 자연스러운 변화",
-    bg: "/clients/note-clinic/images/hero/slide-01.png",
-  },
-  {
-    sub: "365 CLEAN ROOM",
-    title: "365일 운영되는\n방역 클린룸",
-    desc: "철저한 감염 관리 시스템으로 안전한 수술 환경을 보장합니다",
-    bg: "/clients/note-clinic/images/hero/slide-02.png",
-  },
-  {
-    sub: "SPECIALIST ON-SITE",
-    title: "마취과 전문의\n상주 운영",
-    desc: "수술 전 과정에서 전문 마취과 의사가 함께합니다",
-    bg: "/clients/note-clinic/images/hero/slide-03.png",
+    sub: "FACIAL CONTOURING",
+    title: "갸름하고 입체적인\n얼굴 라인의 완성",
+    pc: "/clients/note-clinic/images/hero/eventbanner_01_face.png",
+    mo: "/clients/note-clinic/images/hero/eventbanner_01_face_mo.png",
   },
   {
     sub: "BREAST SURGERY",
-    title: "가슴성형\n차별화된 기술",
-    desc: "자연스러운 볼륨과 완벽한 라인을 위한 맞춤형 솔루션",
-    bg: "/clients/note-clinic/images/hero/slide-04.png",
+    title: "자연스러운 볼륨,\n당당한 여성미의 완성",
+    pc: "/clients/note-clinic/images/hero/eventbanner_02_bra.png",
+    mo: "/clients/note-clinic/images/hero/eventbanner_02_bra_mo.png",
   },
   {
-    sub: "FACIAL CONTOURING",
-    title: "안면윤곽\n섬세한 조각",
-    desc: "얼굴 고유의 아름다움을 살리는 정교한 안면윤곽 수술",
-    bg: "/clients/note-clinic/images/hero/slide-05.png",
+    sub: "RHINOPLASTY",
+    title: "코끝의 디테일이\n인상을 바꿉니다",
+    pc: "/clients/note-clinic/images/hero/eventbanner_03_nose.png",
+    mo: "/clients/note-clinic/images/hero/eventbanner_03_nose_mo.png",
   },
 ];
 
@@ -48,7 +36,7 @@ export default function HeroSlider() {
   const [progressWidth, setProgressWidth] = useState(0);
 
   return (
-    <section className="relative h-[calc(100vh-6.5rem)] min-h-[520px] overflow-hidden bg-night">
+    <section className="relative h-[1400px] md:h-[920px] overflow-hidden bg-night">
       {/* Swiper — 배경 이미지 */}
       <Swiper
         onSwiper={(s) => { swiperRef.current = s; }}
@@ -71,46 +59,52 @@ export default function HeroSlider() {
         {slides.map((slide, i) => (
           <SwiperSlide key={i}>
             <div className="relative w-full h-full">
+              {/* PC 이미지 */}
               <SafeImage
-                src={slide.bg}
+                src={slide.pc}
                 alt={slide.title}
                 fill
-                className="object-cover"
+                className="hidden md:block object-cover"
                 priority={i === 0}
                 sizes="100vw"
               />
-              {/* 다크 오버레이 */}
-              <div className="absolute inset-0 bg-night/35" />
+              {/* 모바일 이미지 */}
+              <SafeImage
+                src={slide.mo}
+                alt={slide.title}
+                fill
+                className="block md:hidden object-cover"
+                priority={i === 0}
+                sizes="100vw"
+              />
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
 
       {/* 텍스트 오버레이 — Framer Motion */}
-      <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeIndex}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-center px-6 max-w-3xl"
-          >
-            <p className="font-serif text-gold text-xs tracking-[0.4em] mb-5">
-              {slides[activeIndex].sub}
-            </p>
-            <h1 className="font-serif-ko text-canvas font-light leading-tight tracking-tight whitespace-pre-line"
-              style={{ fontSize: "clamp(1.75rem, 6vw, 5rem)" }}
+      <div className="absolute inset-0 z-10 flex items-start md:items-center justify-center md:justify-start pointer-events-none">
+        <div className="w-full max-w-[1440px] mx-auto px-6 md:px-16">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeIndex}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="pt-28 md:pt-0 mx-auto md:mx-0 max-w-xl md:max-w-2xl text-center md:text-left [text-shadow:0_2px_14px_rgba(0,0,0,0.4)]"
             >
-              {slides[activeIndex].title}
-            </h1>
-            <div className="w-10 h-px bg-gold mx-auto my-6" />
-            <p className="font-sans-ko text-canvas/70 text-sm md:text-base leading-relaxed">
-              {slides[activeIndex].desc}
-            </p>
-          </motion.div>
-        </AnimatePresence>
+              <p className="font-serif text-gold text-xs tracking-[0.4em] mb-5">
+                {slides[activeIndex].sub}
+              </p>
+              <h1 className="font-serif-ko text-canvas font-light leading-tight tracking-tight whitespace-pre-line"
+                style={{ fontSize: "clamp(1.75rem, 6vw, 5rem)" }}
+              >
+                {slides[activeIndex].title}
+              </h1>
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </div>
 
       {/* 좌우 화살표 */}

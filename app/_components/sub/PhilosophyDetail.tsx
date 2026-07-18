@@ -20,7 +20,7 @@ export default function PhilosophyDetail({
 }: PhilosophyDetailProps) {
   return (
     <section className="py-20 md:py-32 px-6 bg-canvas">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-[1440px] mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

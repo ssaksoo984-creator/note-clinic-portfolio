@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className="bg-night text-canvas">
       {/* 메인 푸터 */}
-      <div className="max-w-6xl mx-auto px-6 py-16">
+      <div className="max-w-[1440px] mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* 브랜드 */}
           <div>
@@ -86,7 +86,7 @@ export default function Footer() {
 
       {/* 하단 바 */}
       <div className="border-t border-canvas/10">
-        <div className="max-w-6xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="max-w-[1440px] mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-dim tracking-wide">
             © 2025 Note Plastic Surgery. All rights reserved.
           </p>

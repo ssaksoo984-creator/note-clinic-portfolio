@@ -17,7 +17,7 @@ interface TransitInfoProps {
 export default function TransitInfo({ title, subtitle, items }: TransitInfoProps) {
   return (
     <section className="py-20 md:py-32 px-6 bg-canvas">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-[1440px] mx-auto">
         <SectionTitle en={subtitle} ko={title} center />
 
         <div className="mt-14 grid grid-cols-1 sm:grid-cols-3 gap-6">

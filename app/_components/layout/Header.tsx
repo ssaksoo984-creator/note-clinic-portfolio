@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { mainNav, aboutNav, treatmentNav } from "./nav";
 import MobileMenu from "./MobileMenu";
@@ -5,10 +8,25 @@ import LanguageSwitcher from "./LanguageSwitcher";
 import { languages } from "../../_data/languages";
 
 export default function Header() {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 4);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 h-16">
-      <div className="absolute inset-0 bg-canvas/95 backdrop-blur-sm border-b border-rule" />
-      <div className="relative max-w-6xl mx-auto px-6 h-full flex items-center justify-between">
+    <header className="fixed top-10 left-0 right-0 z-50 h-16">
+      <div
+        className={`absolute inset-0 transition-all duration-500 ease-out ${
+          scrolled
+            ? "bg-canvas/60 backdrop-blur-md border-b border-canvas/30"
+            : "bg-transparent border-b border-transparent"
+        }`}
+      />
+      <div className="relative max-w-[1440px] mx-auto px-6 h-full flex items-center justify-between">
         {/* 로고 */}
         <Link
           href="/"

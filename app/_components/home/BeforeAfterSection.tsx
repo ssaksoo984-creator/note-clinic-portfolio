@@ -99,7 +99,7 @@ function BeforeAfterPair({
 export default function BeforeAfterSection() {
   return (
     <section className="py-24 px-6 bg-rule/20 overflow-hidden">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-[1440px] mx-auto">
         <SectionTitle en="BEFORE & AFTER" ko="전후사진" />
 
         <div className="mt-14 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">

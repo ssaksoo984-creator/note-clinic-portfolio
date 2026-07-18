@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import {
   Inter,
   Cormorant_Garamond,
-  Noto_Sans_KR,
   Nanum_Gothic,
 } from "next/font/google";
 import "./globals.css";
@@ -10,6 +9,7 @@ import Header from "./_components/layout/Header";
 import Footer from "./_components/layout/Footer";
 import PopupBanner from "./_components/layout/PopupBanner";
 import SideIconBar from "./_components/layout/SideIconBar";
+import EventBanner from "./_components/home/EventBanner";
 import { popups } from "./_data/popup";
 import { sideIcons } from "./_data/sideIcons";
 
@@ -24,14 +24,6 @@ const cormorant = Cormorant_Garamond({
   weight: ["300", "400", "500", "600"],
   variable: "--font-cormorant",
   display: "swap",
-});
-
-const notoSansKR = Noto_Sans_KR({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "700"],
-  variable: "--font-noto-sans",
-  display: "swap",
-  preload: false,
 });
 
 const nanumGothic = Nanum_Gothic({
@@ -57,11 +49,12 @@ export default function RootLayout({
   return (
     <html
       lang="ko"
-      className={`${inter.variable} ${cormorant.variable} ${notoSansKR.variable} ${nanumGothic.variable}`}
+      className={`${inter.variable} ${cormorant.variable} ${nanumGothic.variable}`}
     >
       <body className="min-h-screen flex flex-col bg-canvas text-ink antialiased">
+        <EventBanner />
         <Header />
-        <main className="flex-1 pt-16">{children}</main>
+        <main className="flex-1 pt-10">{children}</main>
         <Footer />
         <SideIconBar items={sideIcons} />
         <PopupBanner popups={popups} />

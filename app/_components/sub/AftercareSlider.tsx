@@ -29,7 +29,7 @@ export default function AftercareSlider({
 
   return (
     <section className="py-20 md:py-32 px-6 bg-canvas overflow-hidden">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-[1440px] mx-auto">
         <div className="flex items-end justify-between gap-6 flex-wrap">
           <SectionTitle en={subtitle} ko={title} />
           <div className="flex gap-2">

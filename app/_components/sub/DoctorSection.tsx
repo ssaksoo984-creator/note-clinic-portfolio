@@ -21,7 +21,7 @@ export default function DoctorSection({
 }: DoctorSectionProps) {
   return (
     <section className="py-20 md:py-32 px-6 bg-rule/20">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-[1440px] mx-auto">
         <SectionTitle en="MEDICAL TEAM" ko="의료진 소개" />
 
         <div className="mt-14 grid grid-cols-1 md:grid-cols-[minmax(0,320px)_1fr] gap-10 md:gap-16">

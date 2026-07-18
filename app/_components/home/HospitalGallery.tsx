@@ -130,7 +130,7 @@ export default function HospitalGallery() {
 
   return (
     <section className="py-24 px-6 bg-canvas">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-[1440px] mx-auto">
         <SectionTitle en="HOSPITAL GALLERY" ko="병원 갤러리" center />
 
         <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-2">

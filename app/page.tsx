@@ -1,4 +1,3 @@
-import EventBanner from "./_components/home/EventBanner";
 import HeroSlider from "./_components/home/HeroSlider";
 import TreatmentCards from "./_components/home/TreatmentCards";
 import BeforeAfterSection from "./_components/home/BeforeAfterSection";
@@ -13,7 +12,6 @@ import { storyPoints } from "./_data/story";
 export default function Home() {
   return (
     <>
-      <EventBanner />
       <HeroSlider />
       <TreatmentCards />
       <ProcessSection

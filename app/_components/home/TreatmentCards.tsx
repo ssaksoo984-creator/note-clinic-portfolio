@@ -51,7 +51,7 @@ const treatments = [
 export default function TreatmentCards() {
   return (
     <section className="py-24 px-6 bg-canvas">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-[1440px] mx-auto">
         <SectionTitle en="TREATMENTS" ko="진료분야" center />
 
         <div className="mt-14 grid grid-cols-2 md:grid-cols-5 gap-px bg-rule">

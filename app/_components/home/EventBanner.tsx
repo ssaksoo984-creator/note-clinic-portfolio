@@ -2,7 +2,7 @@
 
 export default function EventBanner() {
   return (
-    <div className="relative w-full h-10 bg-night border-b border-canvas/10 flex items-center justify-center overflow-hidden">
+    <div className="fixed top-0 left-0 right-0 z-[60] w-full h-10 bg-night border-b border-canvas/10 flex items-center justify-center overflow-hidden">
       {/* 배경 광택 효과 */}
       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gold/5 to-transparent pointer-events-none" />
 
