@@ -69,14 +69,14 @@ export default function TreatmentCards() {
       {/* 배경 골드 그라데이션 원 — 스크롤 진입 시 피어나는 효과 */}
       <motion.div
         aria-hidden
-        initial={{ scale: 0.25, opacity: 0 }}
-        whileInView={{ scale: 1, opacity: 1 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 1.8, ease: [0.25, 0.1, 0.25, 1] }}
-        className="pointer-events-none absolute -left-48 -top-48 w-[720px] h-[720px] rounded-full"
+        initial={{ scale: 0.02, opacity: 0, rotate: -8 }}
+        whileInView={{ scale: [0.02, 1.25, 1], opacity: [0, 1, 1], rotate: [-8, 4, 0] }}
+        viewport={{ once: true, amount: 0.15 }}
+        transition={{ duration: 2.6, times: [0, 0.6, 1], ease: [0.16, 1, 0.3, 1] }}
+        className="pointer-events-none absolute -left-48 -top-48 w-[820px] h-[820px] rounded-full"
         style={{
           background:
-            "radial-gradient(circle, rgba(201,169,110,0.55) 0%, rgba(201,169,110,0.28) 35%, rgba(201,169,110,0.08) 60%, rgba(201,169,110,0) 75%)",
+            "radial-gradient(circle, rgba(201,169,110,0.75) 0%, rgba(201,169,110,0.4) 35%, rgba(201,169,110,0.12) 60%, rgba(201,169,110,0) 75%)",
         }}
       />
 
