@@ -43,7 +43,7 @@ export default function ProcessSection({
         whileInView={{ scale: [0.02, 1.2, 1], opacity: [0, 1, 1], rotate: [8, -4, 0] }}
         viewport={{ once: true, amount: 0.15 }}
         transition={{ duration: 2.6, times: [0, 0.6, 1], ease: [0.16, 1, 0.3, 1] }}
-        className="pointer-events-none absolute -right-16 -top-16 w-[760px] h-[760px] rounded-full"
+        className="pointer-events-none absolute -right-12 top-4 w-[380px] h-[380px] md:-right-24 md:w-[760px] md:h-[760px] rounded-full"
         style={{
           background:
             "radial-gradient(circle, rgba(201,169,110,0.85) 0%, rgba(201,169,110,0.55) 25%, rgba(201,169,110,0.22) 50%, rgba(201,169,110,0) 72%)",
@@ -54,7 +54,7 @@ export default function ProcessSection({
         <SectionTitle en={subtitle} ko={title} center />
 
         {/* 데스크탑 — 리스트 / 이미지 / 텍스트 3단, 자동재생+클릭+호버 연동 */}
-        <div className="mt-20 hidden lg:grid grid-cols-[1fr_auto_1fr] gap-16">
+        <div className="mt-20 hidden lg:grid grid-cols-[1fr_auto_1fr] items-center gap-16">
           <div
             className="flex flex-col justify-center"
             onMouseEnter={() => setPaused(true)}
@@ -90,34 +90,51 @@ export default function ProcessSection({
             })}
           </div>
 
-          <div className="sticky top-1/2 -translate-y-1/2 self-start h-fit">
+          <div>
             <div className="relative w-[480px] h-[520px]">
-              <motion.div
+              <svg
                 aria-hidden
-                className="absolute -top-8 -left-8 w-full h-full"
-                style={{ borderWidth: 2, borderStyle: "solid" }}
-                animate={{
-                  borderColor: ["#c9a96e", "#f5e6c8", "#8a6d3f", "#c9a96e"],
-                  x: [0, 18, -12, 0],
-                  y: [0, -14, 16, 0],
-                  rotate: [0, 8, -6, 0],
-                  scale: [1, 1.08, 0.96, 1],
-                }}
-                transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-              />
-              <motion.div
-                aria-hidden
-                className="absolute -bottom-8 -right-8 w-full h-full"
-                style={{ borderWidth: 2, borderStyle: "solid" }}
-                animate={{
-                  borderColor: ["#8a6d3f", "#c9a96e", "#f5e6c8", "#8a6d3f"],
-                  x: [0, -16, 14, 0],
-                  y: [0, 15, -18, 0],
-                  rotate: [0, -9, 7, 0],
-                  scale: [1, 0.94, 1.1, 1],
-                }}
-                transition={{ duration: 8.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-              />
+                viewBox="0 0 100 100"
+                preserveAspectRatio="none"
+                className="pointer-events-none absolute -inset-16 w-[calc(100%+8rem)] h-[calc(100%+8rem)]"
+              >
+                <defs>
+                  <linearGradient id="processFrameGold" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#c9a96e" stopOpacity="0.15" />
+                    <stop offset="35%" stopColor="#c9a96e" />
+                    <stop offset="50%" stopColor="#ffffff" />
+                    <stop offset="65%" stopColor="#c9a96e" />
+                    <stop offset="100%" stopColor="#c9a96e" stopOpacity="0.15" />
+                    <animateTransform
+                      attributeName="gradientTransform"
+                      type="translate"
+                      values="-1 0; 1 0; -1 0"
+                      dur="5s"
+                      repeatCount="indefinite"
+                    />
+                  </linearGradient>
+                </defs>
+                <motion.rect
+                  x="24" y="14" width="58" height="76"
+                  fill="none"
+                  stroke="url(#processFrameGold)"
+                  strokeWidth="1"
+                  vectorEffect="non-scaling-stroke"
+                  animate={{ rotate: [0, 7, -5, 0], x: [24, 29, 19, 24], y: [14, 9, 18, 14] }}
+                  transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+                  style={{ transformBox: "fill-box", transformOrigin: "50% 50%" }}
+                />
+                <motion.rect
+                  x="18" y="20" width="60" height="72"
+                  fill="none"
+                  stroke="url(#processFrameGold)"
+                  strokeWidth="1"
+                  vectorEffect="non-scaling-stroke"
+                  animate={{ rotate: [0, -8, 6, 0], x: [18, 12, 24, 18], y: [20, 27, 12, 20] }}
+                  transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
+                  style={{ transformBox: "fill-box", transformOrigin: "50% 50%" }}
+                />
+              </svg>
               <div className="relative z-10 w-full h-full border-2 border-gold overflow-hidden">
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -133,7 +150,7 @@ export default function ProcessSection({
             </div>
           </div>
 
-          <div className="sticky top-1/2 -translate-y-1/2 self-start h-fit flex flex-col justify-center">
+          <div>
             <AnimatePresence mode="wait">
               <motion.div
                 key={active}

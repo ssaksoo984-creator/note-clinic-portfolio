@@ -73,7 +73,7 @@ export default function TreatmentCards() {
         whileInView={{ scale: [0.02, 1.25, 1], opacity: [0, 1, 1], rotate: [-8, 4, 0] }}
         viewport={{ once: true, amount: 0.15 }}
         transition={{ duration: 2.6, times: [0, 0.6, 1], ease: [0.16, 1, 0.3, 1] }}
-        className="pointer-events-none absolute -left-48 -top-48 w-[820px] h-[820px] rounded-full"
+        className="pointer-events-none absolute -left-12 top-4 w-[380px] h-[380px] md:-left-24 md:w-[820px] md:h-[820px] rounded-full"
         style={{
           background:
             "radial-gradient(circle, rgba(201,169,110,0.75) 0%, rgba(201,169,110,0.4) 35%, rgba(201,169,110,0.12) 60%, rgba(201,169,110,0) 75%)",
