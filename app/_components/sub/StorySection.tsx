@@ -39,6 +39,7 @@ export default function StorySection({
   points,
 }: StorySectionProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
+  const cardSvgRefs = useRef<(SVGSVGElement | null)[]>([]);
   const { scrollYProgress } = useScroll({
     target: wrapRef,
     offset: ["start start", "end end"],
@@ -184,9 +185,17 @@ export default function StorySection({
                 <motion.div
                   key={p.number}
                   style={{ opacity: cardOpacities[i] }}
-                  className="relative p-6"
+                  className="group relative p-6 overflow-hidden"
+                  onMouseEnter={() => cardSvgRefs.current[i]?.pauseAnimations()}
+                  onMouseLeave={() => cardSvgRefs.current[i]?.unpauseAnimations()}
                 >
+                  {/* 반투명 블랙 배경 + 블러, 호버 시 더 진해짐 */}
+                  <div className="absolute inset-0 bg-black/20 backdrop-blur-sm transition-colors duration-300 group-hover:bg-black/40" />
+
                   <svg
+                    ref={(el) => {
+                      cardSvgRefs.current[i] = el;
+                    }}
                     aria-hidden
                     viewBox="0 0 100 100"
                     preserveAspectRatio="none"
@@ -220,13 +229,15 @@ export default function StorySection({
                     />
                   </svg>
 
-                  <span className="font-serif text-gold text-2xl leading-none">{p.number}</span>
-                  <h3 className="mt-3 font-serif-ko text-canvas text-lg md:text-xl font-bold">
-                    {p.title}
-                  </h3>
-                  <p className="mt-2 font-sans-ko text-canvas/70 text-xs md:text-sm leading-relaxed">
-                    {p.description}
-                  </p>
+                  <div className="relative z-10">
+                    <span className="font-serif text-gold text-2xl leading-none">{p.number}</span>
+                    <h3 className="mt-3 font-serif-ko text-canvas text-lg md:text-xl font-bold">
+                      {p.title}
+                    </h3>
+                    <p className="mt-2 font-sans-ko text-canvas/70 text-xs md:text-sm leading-relaxed">
+                      {p.description}
+                    </p>
+                  </div>
                 </motion.div>
               ))}
             </div>
