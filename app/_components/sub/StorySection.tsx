@@ -37,16 +37,19 @@ export default function StorySection({
     offset: ["start start", "end end"],
   });
 
-  const cubeOpacity = useTransform(scrollYProgress, [0.2, 0.32], [1, 0]);
-  const flatOpacity = useTransform(scrollYProgress, [0.24, 0.36], [0, 1]);
-  const flatSize = useTransform(scrollYProgress, [0.3, 0.72], [`${CUBE_SIZE}px`, "100vw"]);
-  const flatHeight = useTransform(scrollYProgress, [0.3, 0.72], [`${CUBE_SIZE}px`, "100vh"]);
-  const scrimOpacity = useTransform(scrollYProgress, [0.62, 0.72], [0, 1]);
-  const titleOpacity = useTransform(scrollYProgress, [0.7, 0.8], [0, 1]);
-  const titleY = useTransform(scrollYProgress, [0.7, 0.8], [20, 0]);
-  const card1Opacity = useTransform(scrollYProgress, [0.8, 0.86], [0, 1]);
-  const card2Opacity = useTransform(scrollYProgress, [0.86, 0.92], [0, 1]);
-  const card3Opacity = useTransform(scrollYProgress, [0.92, 0.98], [0, 1]);
+  // 큐브 회전은 스크롤에 정직접 연동 — 정면(0면)이 정확히 앞을 보는 각도(360의 배수)로 끝나도록
+  const cubeRotateY = useTransform(scrollYProgress, [0, 0.18], [0, 1080]);
+  const cubeRotateX = useTransform(scrollYProgress, [0, 0.18], [0, 360]);
+  const cubeOpacity = useTransform(scrollYProgress, [0.18, 0.24], [1, 0]);
+  const flatOpacity = useTransform(scrollYProgress, [0.2, 0.26], [0, 1]);
+  const flatSize = useTransform(scrollYProgress, [0.26, 0.68], [`${CUBE_SIZE}px`, "100vw"]);
+  const flatHeight = useTransform(scrollYProgress, [0.26, 0.68], [`${CUBE_SIZE}px`, "100vh"]);
+  const scrimOpacity = useTransform(scrollYProgress, [0.6, 0.7], [0, 1]);
+  const titleOpacity = useTransform(scrollYProgress, [0.68, 0.78], [0, 1]);
+  const titleY = useTransform(scrollYProgress, [0.68, 0.78], [20, 0]);
+  const card1Opacity = useTransform(scrollYProgress, [0.78, 0.84], [0, 1]);
+  const card2Opacity = useTransform(scrollYProgress, [0.84, 0.9], [0, 1]);
+  const card3Opacity = useTransform(scrollYProgress, [0.9, 0.96], [0, 1]);
   const cardOpacities = [card1Opacity, card2Opacity, card3Opacity];
 
   return (
@@ -84,9 +87,11 @@ export default function StorySection({
             <div style={{ perspective: "1200px" }} className="w-[220px] h-[220px]">
               <motion.div
                 className="relative w-full h-full"
-                style={{ transformStyle: "preserve-3d" }}
-                animate={{ rotateX: 360, rotateY: 360 }}
-                transition={{ duration: 14, repeat: Infinity, ease: "linear" }}
+                style={{
+                  transformStyle: "preserve-3d",
+                  rotateX: cubeRotateX,
+                  rotateY: cubeRotateY,
+                }}
               >
                 {cubeFaces.map((face) => (
                   <div
