@@ -84,7 +84,7 @@ export default function HeroSlider() {
 
       {/* 텍스트 오버레이 — Framer Motion */}
       <div className="absolute inset-0 z-10 flex items-start md:items-center justify-center md:justify-start pointer-events-none">
-        <div className="w-full max-w-[1440px] mx-auto px-6 md:px-16">
+        <div className="w-full max-w-[1440px] mx-auto px-6">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeIndex}
@@ -97,8 +97,8 @@ export default function HeroSlider() {
               <p className="font-serif text-gold text-xs tracking-[0.4em] mb-5">
                 {slides[activeIndex].sub}
               </p>
-              <h1 className="font-serif-ko text-canvas font-light leading-tight tracking-tight whitespace-pre-line"
-                style={{ fontSize: "clamp(1.75rem, 6vw, 5rem)" }}
+              <h1 className="font-serif-ko text-canvas font-light leading-tight tracking-[-0.01em] whitespace-pre-line"
+                style={{ fontSize: "clamp(1.6rem, 5.2vw, 4.25rem)" }}
               >
                 {slides[activeIndex].title}
               </h1>

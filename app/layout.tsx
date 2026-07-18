@@ -1,9 +1,5 @@
 import type { Metadata } from "next";
-import {
-  Inter,
-  Cormorant_Garamond,
-  Nanum_Gothic,
-} from "next/font/google";
+import { Inter, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import Header from "./_components/layout/Header";
 import Footer from "./_components/layout/Footer";
@@ -26,14 +22,6 @@ const cormorant = Cormorant_Garamond({
   display: "swap",
 });
 
-const nanumGothic = Nanum_Gothic({
-  subsets: ["latin"],
-  weight: ["400", "700", "800"],
-  variable: "--font-nanum-gothic",
-  display: "swap",
-  preload: false,
-});
-
 export const metadata: Metadata = {
   title: {
     template: "%s | 아르떼성형외과",
@@ -49,7 +37,7 @@ export default function RootLayout({
   return (
     <html
       lang="ko"
-      className={`${inter.variable} ${cormorant.variable} ${nanumGothic.variable}`}
+      className={`${inter.variable} ${cormorant.variable}`}
     >
       <body className="min-h-screen flex flex-col bg-canvas text-ink antialiased">
         <EventBanner />

@@ -14,7 +14,7 @@
 @theme inline {
   --font-serif:    var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
   --font-sans:     var(--font-inter), "Inter", system-ui, sans-serif;
-  --font-serif-ko: var(--font-nanum-gothic), "Nanum Gothic", "Noto Sans KR", sans-serif;
+  --font-serif-ko: "Pretendard", system-ui, sans-serif;
   --font-sans-ko:  "Pretendard", system-ui, sans-serif;
 }
 
