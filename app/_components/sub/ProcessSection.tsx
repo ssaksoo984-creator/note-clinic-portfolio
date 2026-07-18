@@ -14,6 +14,7 @@ interface ProcessSectionProps {
 }
 
 const AUTOPLAY_MS = 4200;
+const PLACEHOLDER_COLORS = ["#e5e5e5", "#e8dcc8", "#d8c9ae", "#cbb896"];
 
 export default function ProcessSection({
   title,
@@ -81,62 +82,11 @@ export default function ProcessSection({
           </div>
 
           <div>
-            <div className="relative w-[480px] h-[520px]">
-              <svg
-                aria-hidden
-                viewBox="0 0 100 100"
-                preserveAspectRatio="none"
-                className="pointer-events-none absolute -inset-16 w-[calc(100%+8rem)] h-[calc(100%+8rem)]"
-              >
-                <defs>
-                  <linearGradient id="processFrameGold" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#c9a96e" stopOpacity="0.15" />
-                    <stop offset="35%" stopColor="#c9a96e" />
-                    <stop offset="50%" stopColor="#ffffff" />
-                    <stop offset="65%" stopColor="#c9a96e" />
-                    <stop offset="100%" stopColor="#c9a96e" stopOpacity="0.15" />
-                    <animateTransform
-                      attributeName="gradientTransform"
-                      type="translate"
-                      values="-1 0; 1 0; -1 0"
-                      dur="5s"
-                      repeatCount="indefinite"
-                    />
-                  </linearGradient>
-                </defs>
-                <motion.rect
-                  x="24" y="14" width="58" height="76"
-                  fill="none"
-                  stroke="url(#processFrameGold)"
-                  strokeWidth="1"
-                  vectorEffect="non-scaling-stroke"
-                  animate={{ rotate: [0, 7, -5, 0], x: [24, 29, 19, 24], y: [14, 9, 18, 14] }}
-                  transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-                  style={{ transformBox: "fill-box", transformOrigin: "50% 50%" }}
-                />
-                <motion.rect
-                  x="18" y="20" width="60" height="72"
-                  fill="none"
-                  stroke="url(#processFrameGold)"
-                  strokeWidth="1"
-                  vectorEffect="non-scaling-stroke"
-                  animate={{ rotate: [0, -8, 6, 0], x: [18, 12, 24, 18], y: [20, 27, 12, 20] }}
-                  transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
-                  style={{ transformBox: "fill-box", transformOrigin: "50% 50%" }}
-                />
-              </svg>
-              <div className="relative z-10 w-full h-full border-2 border-gold overflow-hidden">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={active}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className="absolute inset-0 bg-rule"
-                  />
-                </AnimatePresence>
-              </div>
+            <div className="relative w-[480px] h-[520px] border-2 border-gold overflow-hidden">
+              <div
+                className="absolute inset-0"
+                style={{ backgroundColor: PLACEHOLDER_COLORS[active % PLACEHOLDER_COLORS.length] }}
+              />
             </div>
           </div>
 
@@ -152,7 +102,7 @@ export default function ProcessSection({
                 <span className="block font-serif text-gold/25 text-[160px] leading-none select-none">
                   {steps[active].step}
                 </span>
-                <h3 className="-mt-10 font-serif-ko text-ink text-2xl md:text-3xl font-bold leading-snug mb-4">
+                <h3 className="mt-3 font-serif-ko text-ink text-2xl md:text-3xl font-bold leading-snug mb-4">
                   {steps[active].title}
                 </h3>
                 <p className="text-dim text-sm md:text-base leading-relaxed max-w-sm">

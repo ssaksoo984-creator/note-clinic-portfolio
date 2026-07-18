@@ -13,8 +13,8 @@ interface Particle {
 
 const DOT_COLOR = "201,169,110";
 const LINE_COLOR = "201,169,110";
-const RADIUS = 2;
-const LINK_DISTANCE = 220;
+const RADIUS = 3.5;
+const LINK_DISTANCE = 300;
 const ALPHA_STEP = 0.015;
 
 function randomBetween(min: number, max: number) {
@@ -32,7 +32,7 @@ function createParticle(width: number, height: number): Particle {
   };
 }
 
-export default function ParticleNetwork({ count = 45 }: { count?: number }) {
+export default function ParticleNetwork({ count = 18 }: { count?: number }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -76,8 +76,8 @@ export default function ParticleNetwork({ count = 45 }: { count?: number }) {
           const dist = Math.sqrt(dx * dx + dy * dy);
           const fraction = dist / LINK_DISTANCE;
           if (fraction < 1) {
-            ctx.strokeStyle = `rgba(${LINE_COLOR},${(1 - fraction) * 0.35})`;
-            ctx.lineWidth = 0.8;
+            ctx.strokeStyle = `rgba(${LINE_COLOR},${(1 - fraction) * 0.45})`;
+            ctx.lineWidth = 1.6;
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
