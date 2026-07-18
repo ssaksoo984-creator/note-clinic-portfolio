@@ -15,6 +15,7 @@ interface StorySectionProps {
 const CUBE_SIZE = 220;
 const HALF = CUBE_SIZE / 2;
 const FRONT_IMG = "/clients/note-clinic/images/hero/eventbanner_01_face.png";
+const MARQUEE_TEXT = "ARTE · PERFECT SATISFACTION · ";
 
 const cubeFaces = [
   { key: "front", src: FRONT_IMG, transform: `translateZ(${HALF}px)` },
@@ -36,33 +37,49 @@ export default function StorySection({
     offset: ["start start", "end end"],
   });
 
-  const introOpacity = useTransform(scrollYProgress, [0, 0.18, 0.3], [1, 1, 0]);
-  const introY = useTransform(scrollYProgress, [0, 0.3], [0, -30]);
   const cubeOpacity = useTransform(scrollYProgress, [0.2, 0.32], [1, 0]);
   const flatOpacity = useTransform(scrollYProgress, [0.24, 0.36], [0, 1]);
   const flatSize = useTransform(scrollYProgress, [0.3, 0.72], [`${CUBE_SIZE}px`, "100vw"]);
   const flatHeight = useTransform(scrollYProgress, [0.3, 0.72], [`${CUBE_SIZE}px`, "100vh"]);
-  const scrimOpacity = useTransform(scrollYProgress, [0.68, 0.8], [0, 1]);
-  const finalOpacity = useTransform(scrollYProgress, [0.72, 0.86], [0, 1]);
-  const finalY = useTransform(scrollYProgress, [0.72, 0.86], [30, 0]);
+  const scrimOpacity = useTransform(scrollYProgress, [0.62, 0.72], [0, 1]);
+  const titleOpacity = useTransform(scrollYProgress, [0.7, 0.8], [0, 1]);
+  const titleY = useTransform(scrollYProgress, [0.7, 0.8], [20, 0]);
+  const card1Opacity = useTransform(scrollYProgress, [0.8, 0.86], [0, 1]);
+  const card2Opacity = useTransform(scrollYProgress, [0.86, 0.92], [0, 1]);
+  const card3Opacity = useTransform(scrollYProgress, [0.92, 0.98], [0, 1]);
+  const cardOpacities = [card1Opacity, card2Opacity, card3Opacity];
 
   return (
     <section className="bg-canvas">
       {/* 전체가 한 화면(sticky) 안에서: 타이틀 -> 3D 큐브 -> 풀스크린 이미지 -> 타이틀+3카드 */}
       <div ref={wrapRef} className="relative h-[320vh]">
         <div className="sticky top-0 h-screen overflow-hidden bg-canvas">
-          {/* 인트로 타이틀 */}
+          {/* 큐브 뒤 배경 마퀴 텍스트 */}
           <motion.div
-            style={{ opacity: introOpacity, y: introY }}
-            className="absolute inset-0 z-20 flex items-center justify-center px-6"
+            style={{ opacity: cubeOpacity }}
+            className="pointer-events-none select-none absolute inset-x-0 top-1/2 -translate-y-1/2 overflow-hidden"
           >
-            <SectionTitle en={subtitle} ko={title} center />
+            <motion.div
+              className="flex whitespace-nowrap"
+              animate={{ x: ["0%", "-50%"] }}
+              transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
+            >
+              {[0, 1].map((i) => (
+                <span
+                  key={i}
+                  className="font-serif tracking-[0.3em] px-8"
+                  style={{ fontSize: "clamp(4rem, 12vw, 9rem)", color: "rgba(201,169,110,0.18)" }}
+                >
+                  {MARQUEE_TEXT}
+                </span>
+              ))}
+            </motion.div>
           </motion.div>
 
           {/* 3D 회전 큐브 */}
           <motion.div
             style={{ opacity: cubeOpacity }}
-            className="absolute inset-0 flex items-center justify-center"
+            className="absolute inset-0 z-10 flex items-center justify-center"
           >
             <div style={{ perspective: "1200px" }} className="w-[220px] h-[220px]">
               <motion.div
@@ -112,16 +129,19 @@ export default function StorySection({
             className="absolute inset-0 bg-night/55 pointer-events-none"
           />
 
-          {/* 최종 콘텐츠 — 타이틀 + 3개 카드, 같은 화면 위에 오버레이 */}
-          <motion.div
-            style={{ opacity: finalOpacity, y: finalY }}
-            className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6"
-          >
-            <SectionTitle en={subtitle} ko={title} center light />
+          {/* 최종 콘텐츠 — 타이틀 등장 후, 카드가 1·2·3 순서대로 페이드인 */}
+          <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6">
+            <motion.div style={{ opacity: titleOpacity, y: titleY }}>
+              <SectionTitle en={subtitle} ko={title} center light />
+            </motion.div>
 
             <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 w-full max-w-[1200px]">
               {points.map((p, i) => (
-                <div key={p.number} className="relative p-6">
+                <motion.div
+                  key={p.number}
+                  style={{ opacity: cardOpacities[i] }}
+                  className="relative p-6"
+                >
                   <svg
                     aria-hidden
                     viewBox="0 0 100 100"
@@ -163,10 +183,10 @@ export default function StorySection({
                   <p className="mt-2 font-sans-ko text-canvas/70 text-xs md:text-sm leading-relaxed">
                     {p.description}
                   </p>
-                </div>
+                </motion.div>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
