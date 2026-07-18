@@ -1,7 +1,14 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useMotionValue,
+  useMotionValueEvent,
+  animate,
+} from "framer-motion";
 import SectionTitle from "../ui/SectionTitle";
 import SafeImage from "../ui/SafeImage";
 import type { StoryPoint } from "../../_data/story";
@@ -37,19 +44,41 @@ export default function StorySection({
     offset: ["start start", "end end"],
   });
 
-  // 큐브 회전은 스크롤에 정직접 연동 — 정면(0면)이 정확히 앞을 보는 각도(360의 배수)로 끝나도록
-  const cubeRotateY = useTransform(scrollYProgress, [0, 0.18], [0, 1080]);
-  const cubeRotateX = useTransform(scrollYProgress, [0, 0.18], [0, 360]);
-  const cubeOpacity = useTransform(scrollYProgress, [0.18, 0.24], [1, 0]);
-  const flatOpacity = useTransform(scrollYProgress, [0.2, 0.26], [0, 1]);
-  const flatSize = useTransform(scrollYProgress, [0.26, 0.68], [`${CUBE_SIZE}px`, "100vw"]);
-  const flatHeight = useTransform(scrollYProgress, [0.26, 0.68], [`${CUBE_SIZE}px`, "100vh"]);
-  const scrimOpacity = useTransform(scrollYProgress, [0.6, 0.7], [0, 1]);
-  const titleOpacity = useTransform(scrollYProgress, [0.68, 0.78], [0, 1]);
-  const titleY = useTransform(scrollYProgress, [0.68, 0.78], [20, 0]);
-  const card1Opacity = useTransform(scrollYProgress, [0.78, 0.84], [0, 1]);
-  const card2Opacity = useTransform(scrollYProgress, [0.84, 0.9], [0, 1]);
-  const card3Opacity = useTransform(scrollYProgress, [0.9, 0.96], [0, 1]);
+  // 큐브는 스크롤 전엔 스스로 계속 회전, 스크롤이 시작되는 순간 가장 가까운 정면(360의 배수)으로 멈춤
+  const rotateY = useMotionValue(0);
+  const rotateX = useMotionValue(0);
+  const [settled, setSettled] = useState(false);
+
+  useEffect(() => {
+    if (settled) return;
+    let raf: number;
+    const tick = () => {
+      rotateY.set(rotateY.get() + 0.15);
+      rotateX.set(rotateX.get() + 0.06);
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [settled, rotateX, rotateY]);
+
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
+    if (!settled && v > 0.01) {
+      setSettled(true);
+      animate(rotateY, Math.round(rotateY.get() / 360) * 360, { duration: 0.6, ease: "easeOut" });
+      animate(rotateX, Math.round(rotateX.get() / 360) * 360, { duration: 0.6, ease: "easeOut" });
+    }
+  });
+
+  const cubeOpacity = useTransform(scrollYProgress, [0.08, 0.16], [1, 0]);
+  const flatOpacity = useTransform(scrollYProgress, [0.1, 0.18], [0, 1]);
+  const flatSize = useTransform(scrollYProgress, [0.16, 0.6], [`${CUBE_SIZE}px`, "100vw"]);
+  const flatHeight = useTransform(scrollYProgress, [0.16, 0.6], [`${CUBE_SIZE}px`, "100vh"]);
+  const scrimOpacity = useTransform(scrollYProgress, [0.55, 0.65], [0, 1]);
+  const titleOpacity = useTransform(scrollYProgress, [0.63, 0.73], [0, 1]);
+  const titleY = useTransform(scrollYProgress, [0.63, 0.73], [20, 0]);
+  const card1Opacity = useTransform(scrollYProgress, [0.73, 0.79], [0, 1]);
+  const card2Opacity = useTransform(scrollYProgress, [0.79, 0.85], [0, 1]);
+  const card3Opacity = useTransform(scrollYProgress, [0.85, 0.91], [0, 1]);
   const cardOpacities = [card1Opacity, card2Opacity, card3Opacity];
 
   return (
@@ -89,8 +118,8 @@ export default function StorySection({
                 className="relative w-full h-full"
                 style={{
                   transformStyle: "preserve-3d",
-                  rotateX: cubeRotateX,
-                  rotateY: cubeRotateY,
+                  rotateX,
+                  rotateY,
                 }}
               >
                 {cubeFaces.map((face) => (
