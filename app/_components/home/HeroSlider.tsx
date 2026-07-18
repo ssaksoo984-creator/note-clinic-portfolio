@@ -36,7 +36,7 @@ export default function HeroSlider() {
   const [progressWidth, setProgressWidth] = useState(0);
 
   return (
-    <section className="relative h-[1400px] md:h-[920px] overflow-hidden bg-night">
+    <section className="relative h-[700px] md:h-[920px] overflow-hidden bg-night">
       {/* Swiper — 배경 이미지 */}
       <Swiper
         onSwiper={(s) => { swiperRef.current = s; }}
