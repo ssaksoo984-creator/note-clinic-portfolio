@@ -44,6 +44,16 @@ export default function StorySection({
     offset: ["start start", "end end"],
   });
 
+  // px 단위로 통일해서 보간 — px와 vw/vh를 섞으면 Framer Motion이 중간값을 잘못 계산해 커졌다 작아지는 현상이 생김
+  const [viewport, setViewport] = useState({ width: 1440, height: 900 });
+  useEffect(() => {
+    const updateViewport = () =>
+      setViewport({ width: window.innerWidth, height: window.innerHeight });
+    updateViewport();
+    window.addEventListener("resize", updateViewport);
+    return () => window.removeEventListener("resize", updateViewport);
+  }, []);
+
   // 큐브는 스크롤 전엔 스스로 계속 회전, 스크롤이 시작되는 순간 가장 가까운 정면(360의 배수)으로 멈춤
   const rotateY = useMotionValue(0);
   const rotateX = useMotionValue(0);
@@ -71,8 +81,8 @@ export default function StorySection({
 
   const cubeOpacity = useTransform(scrollYProgress, [0.08, 0.16], [1, 0]);
   const flatOpacity = useTransform(scrollYProgress, [0.1, 0.18], [0, 1]);
-  const flatSize = useTransform(scrollYProgress, [0.16, 0.6], [`${CUBE_SIZE}px`, "100vw"]);
-  const flatHeight = useTransform(scrollYProgress, [0.16, 0.6], [`${CUBE_SIZE}px`, "100vh"]);
+  const flatSize = useTransform(scrollYProgress, [0.16, 0.6], [`${CUBE_SIZE}px`, `${viewport.width}px`]);
+  const flatHeight = useTransform(scrollYProgress, [0.16, 0.6], [`${CUBE_SIZE}px`, `${viewport.height}px`]);
   const scrimOpacity = useTransform(scrollYProgress, [0.55, 0.65], [0, 1]);
   const titleOpacity = useTransform(scrollYProgress, [0.63, 0.73], [0, 1]);
   const titleY = useTransform(scrollYProgress, [0.63, 0.73], [20, 0]);
