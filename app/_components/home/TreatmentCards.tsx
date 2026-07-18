@@ -97,83 +97,83 @@ export default function TreatmentCards() {
           onMouseMove={handleMouseMove}
           className="relative pl-6 md:pl-[max(1.5rem,calc((100vw-1440px)/2+1.5rem))] md:cursor-none"
         >
-        <Swiper
-          modules={[FreeMode]}
-          freeMode={{ enabled: true, momentum: true, sticky: false }}
-          grabCursor={false}
-          slidesPerView="auto"
-          spaceBetween={24}
-          className="!pr-6"
-        >
-          {treatments.map((item, i) => (
-            <SwiperSlide key={item.href} style={{ width: "min(85vw, 420px)" }} className="!h-auto">
-              <Link href={item.href} className="group block">
-                <div className="relative aspect-[3/4] overflow-hidden bg-rule">
-                  <SafeImage
-                    src={item.src}
-                    alt={item.label}
-                    fill
-                    sizes="(max-width: 768px) 85vw, 420px"
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <SafeImage
-                    src={item.hoverSrc}
-                    alt=""
-                    fill
-                    sizes="(max-width: 768px) 85vw, 420px"
-                    className="object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  />
-                </div>
+          <Swiper
+            modules={[FreeMode]}
+            freeMode={{ enabled: true, momentum: true, sticky: false }}
+            grabCursor={false}
+            slidesPerView="auto"
+            spaceBetween={24}
+            className="!pr-6"
+          >
+            {treatments.map((item, i) => (
+              <SwiperSlide key={item.href} style={{ width: "min(85vw, 420px)" }} className="!h-auto">
+                <Link href={item.href} className="group block">
+                  <div className="relative aspect-[3/4] overflow-hidden bg-rule">
+                    <SafeImage
+                      src={item.src}
+                      alt={item.label}
+                      fill
+                      sizes="(max-width: 768px) 85vw, 420px"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <SafeImage
+                      src={item.hoverSrc}
+                      alt=""
+                      fill
+                      sizes="(max-width: 768px) 85vw, 420px"
+                      className="object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    />
+                  </div>
 
-                <div className="mt-5 flex items-start justify-between gap-4">
-                  <h3 className="font-serif-ko text-ink text-xl md:text-2xl font-light">
-                    {item.label}
-                  </h3>
-                  <span className="shrink-0 flex items-center gap-2 text-[#4a2f1c] text-[11px] tracking-widest pt-1.5">
-                    {String(i + 1).padStart(2, "0")}
-                    <span className="w-4 h-px bg-[#4a2f1c]/40" />
-                    {item.en}
-                  </span>
-                </div>
-                <p className="mt-2 text-dim text-sm leading-relaxed">{item.desc}</p>
-              </Link>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+                  <div className="mt-5 flex items-start justify-between gap-4">
+                    <h3 className="font-serif-ko text-ink text-xl md:text-2xl font-light">
+                      {item.label}
+                    </h3>
+                    <span className="shrink-0 flex items-center gap-2 text-[#4a2f1c] text-[11px] tracking-widest pt-1.5">
+                      {String(i + 1).padStart(2, "0")}
+                      <span className="w-4 h-px bg-[#4a2f1c]/40" />
+                      {item.en}
+                    </span>
+                  </div>
+                  <p className="mt-2 text-dim text-sm leading-relaxed">{item.desc}</p>
+                </Link>
+              </SwiperSlide>
+            ))}
+          </Swiper>
 
-        {/* 커스텀 드래그 배지 (데스크탑 전용, 마우스 추적) */}
-        <div
-          aria-hidden
-          className="hidden md:flex pointer-events-none absolute z-20 w-24 h-24 items-center justify-center transition-opacity duration-300"
-          style={{
-            left: badgePos.x,
-            top: badgePos.y,
-            transform: "translate(-50%, -50%)",
-            opacity: hovering ? 1 : 0,
-          }}
-        >
+          {/* 커스텀 드래그 배지 (데스크탑 전용, 마우스 추적) */}
           <div
-            className="absolute inset-0 p-[1.5px]"
+            aria-hidden
+            className="hidden md:flex pointer-events-none absolute z-20 w-24 h-24 items-center justify-center transition-opacity duration-300"
             style={{
-              background:
-                "linear-gradient(135deg, rgba(201,169,110,0.9), #c9a96e 40%, #f5e6c8 60%, rgba(201,169,110,0.9))",
+              left: badgePos.x,
+              top: badgePos.y,
+              transform: "translate(-50%, -50%)",
+              opacity: hovering ? 1 : 0,
             }}
           >
             <div
-              className="w-full h-full"
-              style={{ background: "linear-gradient(135deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 100%)" }}
-            />
+              className="absolute inset-0 p-[1.5px]"
+              style={{
+                background:
+                  "linear-gradient(135deg, rgba(201,169,110,0.9), #c9a96e 40%, #f5e6c8 60%, rgba(201,169,110,0.9))",
+              }}
+            >
+              <div
+                className="w-full h-full"
+                style={{ background: "linear-gradient(135deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 100%)" }}
+              />
+            </div>
+            <div className="relative flex items-center gap-2 text-canvas text-[10px] tracking-[0.25em]">
+              <svg width="10" height="10" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1">
+                <polyline points="12,2 5,9 12,16" />
+              </svg>
+              DRAG
+              <svg width="10" height="10" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1">
+                <polyline points="6,2 13,9 6,16" />
+              </svg>
+            </div>
           </div>
-          <div className="relative flex items-center gap-2 text-canvas text-[10px] tracking-[0.25em]">
-            <svg width="10" height="10" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1">
-              <polyline points="12,2 5,9 12,16" />
-            </svg>
-            DRAG
-            <svg width="10" height="10" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1">
-              <polyline points="6,2 13,9 6,16" />
-            </svg>
-          </div>
-        </div>
         </div>
       </motion.div>
     </section>
