@@ -73,24 +73,30 @@ export default function TreatmentCards() {
         whileInView={{ scale: 1, opacity: 1 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 1.8, ease: [0.25, 0.1, 0.25, 1] }}
-        className="pointer-events-none absolute -left-40 -bottom-40 w-[560px] h-[560px] rounded-full"
+        className="pointer-events-none absolute -left-48 -top-48 w-[720px] h-[720px] rounded-full"
         style={{
           background:
             "radial-gradient(circle, rgba(201,169,110,0.55) 0%, rgba(201,169,110,0.28) 35%, rgba(201,169,110,0.08) 60%, rgba(201,169,110,0) 75%)",
         }}
       />
 
-      <div className="relative max-w-[1440px] mx-auto px-6 mb-14">
-        <SectionTitle en="TREATMENTS" ko="진료분야" center />
-      </div>
-
-      <div
-        ref={containerRef}
-        onMouseEnter={() => setHovering(true)}
-        onMouseLeave={() => setHovering(false)}
-        onMouseMove={handleMouseMove}
-        className="relative pl-6 md:pl-[max(1.5rem,calc((100vw-1440px)/2+1.5rem))] md:cursor-none"
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.9, ease: [0.25, 0.1, 0.25, 1] }}
       >
+        <div className="relative max-w-[1440px] mx-auto px-6 mb-14">
+          <SectionTitle en="TREATMENTS" ko="진료분야" center />
+        </div>
+
+        <div
+          ref={containerRef}
+          onMouseEnter={() => setHovering(true)}
+          onMouseLeave={() => setHovering(false)}
+          onMouseMove={handleMouseMove}
+          className="relative pl-6 md:pl-[max(1.5rem,calc((100vw-1440px)/2+1.5rem))] md:cursor-none"
+        >
         <Swiper
           modules={[FreeMode]}
           freeMode={{ enabled: true, momentum: true, sticky: false }}
@@ -100,21 +106,21 @@ export default function TreatmentCards() {
           className="!pr-6"
         >
           {treatments.map((item, i) => (
-            <SwiperSlide key={item.href} style={{ width: "min(78vw, 340px)" }} className="!h-auto">
+            <SwiperSlide key={item.href} style={{ width: "min(85vw, 420px)" }} className="!h-auto">
               <Link href={item.href} className="group block">
                 <div className="relative aspect-[3/4] overflow-hidden bg-rule">
                   <SafeImage
                     src={item.src}
                     alt={item.label}
                     fill
-                    sizes="(max-width: 768px) 78vw, 340px"
+                    sizes="(max-width: 768px) 85vw, 420px"
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <SafeImage
                     src={item.hoverSrc}
                     alt=""
                     fill
-                    sizes="(max-width: 768px) 78vw, 340px"
+                    sizes="(max-width: 768px) 85vw, 420px"
                     className="object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                   />
                 </div>
@@ -123,10 +129,10 @@ export default function TreatmentCards() {
                   <h3 className="font-serif-ko text-ink text-xl md:text-2xl font-light">
                     {item.label}
                   </h3>
-                  <span className="shrink-0 flex items-center gap-2 text-dim text-[11px] tracking-widest pt-1.5">
+                  <span className="shrink-0 flex items-center gap-2 text-[#4a2f1c] text-[11px] tracking-widest pt-1.5">
                     {String(i + 1).padStart(2, "0")}
-                    <span className="w-4 h-px bg-rule" />
-                    TREATMENTS
+                    <span className="w-4 h-px bg-[#4a2f1c]/40" />
+                    {item.en}
                   </span>
                 </div>
                 <p className="mt-2 text-dim text-sm leading-relaxed">{item.desc}</p>
@@ -155,7 +161,7 @@ export default function TreatmentCards() {
           >
             <div
               className="w-full h-full"
-              style={{ background: "linear-gradient(135deg, #000000 0%, #262626 55%, #000000 100%)" }}
+              style={{ background: "linear-gradient(135deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 100%)" }}
             />
           </div>
           <div className="relative flex items-center gap-2 text-canvas text-[10px] tracking-[0.25em]">
@@ -168,7 +174,8 @@ export default function TreatmentCards() {
             </svg>
           </div>
         </div>
-      </div>
+        </div>
+      </motion.div>
     </section>
   );
 }
