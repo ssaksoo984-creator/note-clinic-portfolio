@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import SectionTitle from "../ui/SectionTitle";
@@ -12,48 +12,7 @@ interface ProcessSectionProps {
   steps: ProcessStep[];
 }
 
-function NavItem({
-  step,
-  index,
-  active,
-  onActivate,
-}: {
-  step: ProcessStep;
-  index: number;
-  active: boolean;
-  onActivate: (i: number) => void;
-}) {
-  const { ref } = useInView({
-    rootMargin: "-45% 0% -45% 0%",
-    onChange: (inView) => {
-      if (inView) onActivate(index);
-    },
-  });
-
-  return (
-    <div
-      ref={ref}
-      onMouseEnter={() => onActivate(index)}
-      onClick={() => onActivate(index)}
-      className="flex min-h-[46vh] flex-col justify-center items-end text-right cursor-pointer"
-    >
-      <span
-        className={`font-serif text-sm tracking-[0.3em] transition-colors duration-500 ${
-          active ? "text-gold" : "text-rule"
-        }`}
-      >
-        {step.step}
-      </span>
-      <h3
-        className={`mt-2 font-serif-ko text-2xl md:text-3xl font-light leading-snug transition-colors duration-500 ${
-          active ? "text-ink" : "text-dim/40"
-        }`}
-      >
-        {step.title}
-      </h3>
-    </div>
-  );
-}
+const AUTOPLAY_MS = 4200;
 
 export default function ProcessSection({
   title,
@@ -61,9 +20,22 @@ export default function ProcessSection({
   steps,
 }: ProcessSectionProps) {
   const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const { ref: sectionRef, inView: sectionInView } = useInView({ threshold: 0.3 });
+
+  useEffect(() => {
+    if (!sectionInView || paused) return;
+    const id = setInterval(() => {
+      setActive((prev) => (prev + 1) % steps.length);
+    }, AUTOPLAY_MS);
+    return () => clearInterval(id);
+  }, [sectionInView, paused, steps.length]);
 
   return (
-    <section className="relative overflow-hidden py-20 md:py-32 px-6 bg-canvas">
+    <section
+      ref={sectionRef}
+      className="relative overflow-hidden py-20 md:py-32 px-6 bg-canvas"
+    >
       {/* 배경 골드 그라데이션 원 — 스크롤 진입 시 드라마틱하게 피어나는 효과 */}
       <motion.div
         aria-hidden
@@ -81,33 +53,70 @@ export default function ProcessSection({
       <div className="relative max-w-[1440px] mx-auto">
         <SectionTitle en={subtitle} ko={title} center />
 
-        {/* 데스크탑 — 스크롤/호버/클릭 연동 3단 레이아웃 */}
+        {/* 데스크탑 — 리스트 / 이미지 / 텍스트 3단, 자동재생+클릭+호버 연동 */}
         <div className="mt-20 hidden lg:grid grid-cols-[1fr_auto_1fr] gap-16">
-          <div className="flex flex-col">
-            {steps.map((s, i) => (
-              <NavItem
-                key={s.step}
-                step={s}
-                index={i}
-                active={active === i}
-                onActivate={setActive}
-              />
-            ))}
+          <div
+            className="flex flex-col justify-center"
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => setPaused(false)}
+          >
+            {steps.map((s, i) => {
+              const isActive = active === i;
+              return (
+                <div
+                  key={s.step}
+                  onClick={() => setActive(i)}
+                  onMouseEnter={() => setActive(i)}
+                  className="flex items-baseline justify-end gap-3 py-3 cursor-pointer"
+                >
+                  <span
+                    className={`font-serif tracking-[0.2em] transition-all duration-300 ${
+                      isActive ? "text-gold text-sm" : "text-rule text-xs"
+                    }`}
+                  >
+                    {s.step}
+                  </span>
+                  <h3
+                    className={`font-serif-ko transition-all duration-300 ${
+                      isActive
+                        ? "text-ink font-semibold text-2xl md:text-3xl"
+                        : "text-dim/50 font-light text-base md:text-lg"
+                    }`}
+                  >
+                    {s.title}
+                  </h3>
+                </div>
+              );
+            })}
           </div>
 
           <div className="sticky top-1/2 -translate-y-1/2 self-start h-fit">
             <div className="relative w-[480px] h-[520px]">
               <motion.div
                 aria-hidden
-                className="absolute -top-3 -left-3 w-full h-full border border-gold/70"
-                animate={{ x: [0, 6, -3, 0], y: [0, -4, 5, 0], rotate: [0, 2, -1.5, 0] }}
-                transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -top-8 -left-8 w-full h-full"
+                style={{ borderWidth: 2, borderStyle: "solid" }}
+                animate={{
+                  borderColor: ["#c9a96e", "#f5e6c8", "#8a6d3f", "#c9a96e"],
+                  x: [0, 18, -12, 0],
+                  y: [0, -14, 16, 0],
+                  rotate: [0, 8, -6, 0],
+                  scale: [1, 1.08, 0.96, 1],
+                }}
+                transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
               />
               <motion.div
                 aria-hidden
-                className="absolute -bottom-3 -right-3 w-full h-full border border-gold/50"
-                animate={{ x: [0, -5, 4, 0], y: [0, 5, -6, 0], rotate: [0, -2, 1.5, 0] }}
-                transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+                className="absolute -bottom-8 -right-8 w-full h-full"
+                style={{ borderWidth: 2, borderStyle: "solid" }}
+                animate={{
+                  borderColor: ["#8a6d3f", "#c9a96e", "#f5e6c8", "#8a6d3f"],
+                  x: [0, -16, 14, 0],
+                  y: [0, 15, -18, 0],
+                  rotate: [0, -9, 7, 0],
+                  scale: [1, 0.94, 1.1, 1],
+                }}
+                transition={{ duration: 8.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
               />
               <div className="relative z-10 w-full h-full border-2 border-gold overflow-hidden">
                 <AnimatePresence mode="wait">
@@ -133,7 +142,10 @@ export default function ProcessSection({
                 exit={{ opacity: 0, y: -16 }}
                 transition={{ duration: 0.5 }}
               >
-                <h3 className="font-serif-ko text-ink text-2xl md:text-3xl font-light leading-snug mb-4">
+                <span className="block font-serif text-gold/25 text-[120px] leading-none select-none">
+                  {steps[active].step}
+                </span>
+                <h3 className="-mt-8 font-serif-ko text-ink text-2xl md:text-3xl font-light leading-snug mb-4">
                   {steps[active].title}
                 </h3>
                 <p className="text-dim text-sm md:text-base leading-relaxed max-w-sm">
