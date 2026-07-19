@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import {
   motion,
-  AnimatePresence,
   useScroll,
   useTransform,
   useMotionValue,
@@ -97,14 +96,19 @@ export default function StorySection({
   const card3Y = useTransform(scrollYProgress, [0.85, 0.91], [-32, 0]);
   const cardYs = [card1Y, card2Y, card3Y];
 
-  // 모바일 — 3D 트랜스폼/스크롤 고정이 불안정한 기기가 많아 자동 크로스페이드로 대체
-  const [mobileImgIndex, setMobileImgIndex] = useState(0);
+  // 모바일 — 스크롤 고정(sticky) 없이, 3D 큐브 자체는 독립적으로 계속 회전만 함
+  const mobileRotateX = useMotionValue(0);
+  const mobileRotateY = useMotionValue(0);
   useEffect(() => {
-    const id = setInterval(() => {
-      setMobileImgIndex((prev) => (prev + 1) % cubeFaces.length);
-    }, 2400);
-    return () => clearInterval(id);
-  }, []);
+    let raf: number;
+    const tick = () => {
+      mobileRotateY.set(mobileRotateY.get() + 0.2);
+      mobileRotateX.set(mobileRotateX.get() + 0.08);
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [mobileRotateX, mobileRotateY]);
 
   return (
     <section className="bg-canvas">
@@ -261,7 +265,7 @@ export default function StorySection({
         </div>
       </div>
 
-      {/* 모바일 전용 — 3D 트랜스폼/장시간 스크롤 고정 없이, 자동 크로스페이드 + 순차 등장으로 안정적으로 동작 */}
+      {/* 모바일 전용 — 스크롤 고정(sticky) 없이, 3D 큐브는 그대로 살리고 순차 등장으로 안정적으로 동작 */}
       <div className="md:hidden relative overflow-hidden py-20 px-6">
         <div className="relative h-[260px] flex items-center justify-center overflow-hidden">
           <div className="pointer-events-none select-none absolute inset-x-0 top-1/2 -translate-y-1/2 overflow-hidden">
@@ -282,25 +286,34 @@ export default function StorySection({
             </motion.div>
           </div>
 
-          <div className="relative z-10 w-[200px] h-[200px] border-2 border-gold overflow-hidden">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={mobileImgIndex}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.6 }}
-                className="absolute inset-0"
-              >
-                <SafeImage
-                  src={cubeFaces[mobileImgIndex].src}
-                  alt=""
-                  fill
-                  sizes="200px"
-                  className="object-cover"
-                />
-              </motion.div>
-            </AnimatePresence>
+          <div style={{ perspective: "1200px" }} className="relative z-10 w-[180px] h-[180px]">
+            <motion.div
+              className="relative w-full h-full"
+              style={{
+                transformStyle: "preserve-3d",
+                rotateX: mobileRotateX,
+                rotateY: mobileRotateY,
+              }}
+            >
+              {cubeFaces.map((face) => (
+                <div
+                  key={face.key}
+                  className="absolute inset-0 overflow-hidden border border-gold/40"
+                  style={{
+                    transform: face.transform.replace(`${HALF}px`, "90px"),
+                    backfaceVisibility: "hidden",
+                  }}
+                >
+                  <SafeImage
+                    src={face.src}
+                    alt=""
+                    fill
+                    sizes="180px"
+                    className="object-cover"
+                  />
+                </div>
+              ))}
+            </motion.div>
           </div>
         </div>
 
