@@ -10,8 +10,8 @@ import AftercareSlider from "../_components/sub/AftercareSlider";
 import FAQAccordion from "../_components/sub/FAQAccordion";
 
 export const metadata: Metadata = {
-  title: "가슴성형 | 아르떼성형외과",
-  description: "체형과 흉곽 구조를 고려한 아르떼성형외과의 맞춤 가슴성형",
+  title: "가슴성형 | ARTE 성형외과",
+  description: "체형과 흉곽 구조를 고려한 ARTE 성형외과의 맞춤 가슴성형",
 };
 
 const methods = [
@@ -88,7 +88,7 @@ const career = [
   "대한미용성형외과학회 정회원",
   "○○대학교 의과대학 졸업",
   "○○대학병원 성형외과 수련",
-  "아르떼성형외과 대표원장",
+  "ARTE 성형외과 대표원장",
 ];
 
 const aftercareItems = [
@@ -151,7 +151,7 @@ export default function BreastPage() {
 
       <TreatmentIntro
         title="자연스러운 볼륨, 완벽한 라인의 균형"
-        description="아르떼성형외과는 개인의 체형과 흉곽 구조를 고려한 자연스러운 가슴성형을 지향합니다. 인공적인 볼륨감보다 몸 전체와 조화를 이루는 자연스러운 라인을 최우선으로 설계합니다."
+        description="ARTE 성형외과는 개인의 체형과 흉곽 구조를 고려한 자연스러운 가슴성형을 지향합니다. 인공적인 볼륨감보다 몸 전체와 조화를 이루는 자연스러운 라인을 최우선으로 설계합니다."
         image="/clients/note-clinic/images/treatments/breast-hover.jpg"
         imageAlt="가슴성형 상담 이미지"
         points={[
@@ -183,7 +183,7 @@ export default function BreastPage() {
       />
 
       <AftercareSlider
-        title="아르떼만의 사후관리"
+        title="ARTE만의 사후관리"
         subtitle="AFTERCARE"
         items={aftercareItems}
       />

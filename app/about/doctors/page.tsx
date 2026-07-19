@@ -4,8 +4,8 @@ import ConsultCTA from "../../_components/ui/ConsultCTA";
 import DoctorGrid from "../../_components/sub/DoctorGrid";
 
 export const metadata: Metadata = {
-  title: "의료진 소개 | 아르떼성형외과",
-  description: "각 분야 전문성을 갖춘 아르떼성형외과 의료진을 소개합니다",
+  title: "의료진 소개 | ARTE 성형외과",
+  description: "각 분야 전문성을 갖춘 ARTE 성형외과 의료진을 소개합니다",
 };
 
 const doctors = [
@@ -16,7 +16,7 @@ const doctors = [
     image: "/clients/note-clinic/images/doctor/team-kim.jpg",
     intro: "완벽한 수술을 위해 끊임없이 연구하고\n치열하게 고민합니다.",
     career: [
-      "현 아르떼성형외과 대표원장",
+      "현 ARTE 성형외과 대표원장",
       "전 리페어성형외과 원장",
       "연세대학교 의과대학 졸업",
       "연세대학교 세브란스병원 수련의",
@@ -37,7 +37,7 @@ const doctors = [
     image: "/clients/note-clinic/images/doctor/team-park.jpg",
     intro: "눈매 하나로 인상 전체가 달라진다는 믿음으로\n1mm의 균형까지 세심하게 설계합니다.",
     career: [
-      "현 아르떼성형외과 눈성형 담당원장",
+      "현 ARTE 성형외과 눈성형 담당원장",
       "전 온누리안과성형외과 원장",
       "고려대학교 의과대학 졸업",
       "고려대학교 안암병원 수련의",
@@ -54,7 +54,7 @@ const doctors = [
     image: "/clients/note-clinic/images/doctor/team-lee.jpg",
     intro: "얼굴 전체의 균형 속에서 자연스러운 코 라인을\n찾아내는 것을 최우선으로 생각합니다.",
     career: [
-      "현 아르떼성형외과 코성형 담당원장",
+      "현 ARTE 성형외과 코성형 담당원장",
       "전 라인성형외과 원장",
       "성균관대학교 의과대학 졸업",
       "삼성서울병원 수련의",
@@ -71,7 +71,7 @@ const doctors = [
     image: "/clients/note-clinic/images/doctor/team-choi.jpg",
     intro: "뼈와 신경의 구조를 정밀하게 살펴\n안전하고 자연스러운 라인을 완성합니다.",
     career: [
-      "현 아르떼성형외과 안면윤곽 담당원장",
+      "현 ARTE 성형외과 안면윤곽 담당원장",
       "전 조각라인성형외과 원장",
       "가톨릭대학교 의과대학 졸업",
       "서울성모병원 수련의",
@@ -89,7 +89,7 @@ export default function AboutDoctorsPage() {
       <PageHero
         en="MEDICAL TEAM"
         title="의료진 소개"
-        description="각 분야 전문성을 갖춘 아르떼성형외과 의료진을 소개합니다."
+        description="각 분야 전문성을 갖춘 ARTE 성형외과 의료진을 소개합니다."
       />
 
       <DoctorGrid title="의료진" subtitle="OUR DOCTORS" doctors={doctors} />

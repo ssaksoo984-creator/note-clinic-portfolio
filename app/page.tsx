@@ -21,7 +21,7 @@ export default function Home() {
       />
       <BeforeAfterSection />
       <StorySection
-        title="아르떼가 지켜온 약속"
+        title="ARTE가 지켜온 약속"
         subtitle="WHY ARTE"
         points={storyPoints}
       />

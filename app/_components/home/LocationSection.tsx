@@ -28,14 +28,14 @@ export default function LocationSection() {
             {/* 병원 정보 */}
             <div>
               <p className="font-serif text-gold text-xs tracking-[0.3em] mb-3">HOSPITAL INFO</p>
-              <h3 className="font-serif-ko text-ink text-2xl font-light mb-4">아르떼성형외과</h3>
+              <h3 className="font-serif-ko text-ink text-2xl font-light mb-4">ARTE 성형외과</h3>
               <address className="not-italic flex flex-col gap-2 text-sm text-ink leading-relaxed">
                 <div className="flex items-start gap-3">
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.2" className="mt-0.5 shrink-0 text-gold">
                     <path d="M8 1C5.24 1 3 3.24 3 6c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5z" />
                     <circle cx="8" cy="6" r="1.5" />
                   </svg>
-                  <span>서울특별시 강남구 압구정로 000<br />아르떼빌딩 4·5F</span>
+                  <span>서울특별시 강남구 압구정로 000<br />ARTE빌딩 4·5F</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.2" className="shrink-0 text-gold">
@@ -99,7 +99,7 @@ export default function LocationSection() {
               src="https://www.openstreetmap.org/export/embed.html?bbox=127.031%2C37.509%2C127.063%2C37.526&layer=mapnik&marker=37.5172%2C127.0473"
               width="100%"
               height="100%"
-              title="아르떼성형외과 위치"
+              title="ARTE 성형외과 위치"
               className="absolute inset-0 w-full h-full border-0 grayscale hover:grayscale-0 transition-all duration-500"
               loading="lazy"
             />

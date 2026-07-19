@@ -7,7 +7,7 @@ export default function EventBanner() {
       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gold/5 to-transparent pointer-events-none" />
 
       <p className="shimmer-text font-sans-ko font-medium text-[10px] sm:text-sm tracking-[0.05em] sm:tracking-[0.2em] select-none whitespace-nowrap px-4 truncate max-w-full">
-        아르떼성형외과 스페셜 이벤트&nbsp;&nbsp;·&nbsp;&nbsp;봄맞이 상담 할인 프로모션 진행 중
+        ARTE 성형외과 스페셜 이벤트&nbsp;&nbsp;·&nbsp;&nbsp;봄맞이 상담 할인 프로모션 진행 중
       </p>
     </div>
   );

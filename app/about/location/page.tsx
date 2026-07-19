@@ -5,8 +5,8 @@ import LocationSection from "../../_components/home/LocationSection";
 import TransitInfo from "../../_components/sub/TransitInfo";
 
 export const metadata: Metadata = {
-  title: "오시는 길 | 아르떼성형외과",
-  description: "아르떼성형외과로 오시는 다양한 방법을 안내해 드립니다",
+  title: "오시는 길 | ARTE 성형외과",
+  description: "ARTE 성형외과로 오시는 다양한 방법을 안내해 드립니다",
 };
 
 const transitItems = [
@@ -30,7 +30,7 @@ export default function AboutLocationPage() {
       <PageHero
         en="LOCATION"
         title="오시는 길"
-        description="아르떼성형외과로 오시는 다양한 방법을 안내해 드립니다."
+        description="ARTE 성형외과로 오시는 다양한 방법을 안내해 드립니다."
       />
 
       <LocationSection />

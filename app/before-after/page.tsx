@@ -4,8 +4,8 @@ import ConsultCTA from "../_components/ui/ConsultCTA";
 import BeforeAfterGallery from "../_components/sub/BeforeAfterGallery";
 
 export const metadata: Metadata = {
-  title: "전후사진 | 아르떼성형외과",
-  description: "아르떼성형외과 시술 부위별 전후사진을 확인해 보세요",
+  title: "전후사진 | ARTE 성형외과",
+  description: "ARTE 성형외과 시술 부위별 전후사진을 확인해 보세요",
 };
 
 const IMG = "/clients/note-clinic/images/before-after";
@@ -115,7 +115,7 @@ export default function BeforeAfterPage() {
       <PageHero
         en="BEFORE & AFTER"
         title="전후사진"
-        description="아르떼성형외과와 함께한 변화를 시술 부위별로 확인해 보세요."
+        description="ARTE 성형외과와 함께한 변화를 시술 부위별로 확인해 보세요."
       />
 
       <section className="py-20 md:py-32 px-6 bg-canvas">

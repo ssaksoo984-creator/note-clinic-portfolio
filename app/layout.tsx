@@ -24,11 +24,11 @@ const cormorant = Cormorant_Garamond({
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | 아르떼성형외과",
-    default: "아르떼성형외과 | 자연스러운 아름다움",
+    template: "%s | ARTE 성형외과",
+    default: "ARTE 성형외과 | 자연스러운 아름다움",
   },
   description:
-    "아르떼성형외과에서 자연스럽고 아름다운 변화를 경험하세요. 눈성형, 코성형, 안면윤곽, 가슴성형 전문 클리닉.",
+    "ARTE 성형외과에서 자연스럽고 아름다운 변화를 경험하세요. 눈성형, 코성형, 안면윤곽, 가슴성형 전문 클리닉.",
 };
 
 export default function RootLayout({

@@ -4,8 +4,8 @@ import ConsultCTA from "../_components/ui/ConsultCTA";
 import EventAccordionList from "../_components/sub/EventAccordionList";
 
 export const metadata: Metadata = {
-  title: "이벤트 | 아르떼성형외과",
-  description: "아르떼성형외과에서 진행 중인 이벤트와 프로모션을 확인해 보세요",
+  title: "이벤트 | ARTE 성형외과",
+  description: "ARTE 성형외과에서 진행 중인 이벤트와 프로모션을 확인해 보세요",
 };
 
 const IMG = "/clients/note-clinic/images/event";
@@ -32,7 +32,7 @@ const events = [
     period: "상시 진행",
     summary: "첫 방문 고객에 한해 정밀 상담을 무료로 진행합니다.",
     detail:
-      "아르떼성형외과를 처음 방문하는 고객을 대상으로 3D 시뮬레이션을 포함한 정밀 상담을 무료로 제공합니다. 상담 후 바로 수술 일정을 결정하지 않아도 되며, 충분히 고민하신 후 다시 방문하셔도 좋습니다.",
+      "ARTE 성형외과를 처음 방문하는 고객을 대상으로 3D 시뮬레이션을 포함한 정밀 상담을 무료로 제공합니다. 상담 후 바로 수술 일정을 결정하지 않아도 되며, 충분히 고민하신 후 다시 방문하셔도 좋습니다.",
     image: `${IMG}/first-visit-event.jpg`,
   },
   {
@@ -59,7 +59,7 @@ export default function EventPage() {
       <PageHero
         en="EVENT"
         title="이벤트"
-        description="아르떼성형외과에서 진행 중인 이벤트와 프로모션을 확인해 보세요."
+        description="ARTE 성형외과에서 진행 중인 이벤트와 프로모션을 확인해 보세요."
       />
 
       <section className="py-20 md:py-32 px-6 bg-canvas">

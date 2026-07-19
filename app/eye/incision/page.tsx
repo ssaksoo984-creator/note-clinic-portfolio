@@ -7,7 +7,7 @@ const data = subTreatments.find(
 )!;
 
 export const metadata: Metadata = {
-  title: `${data.title} | 아르떼성형외과`,
+  title: `${data.title} | ARTE 성형외과`,
   description: data.description,
 };
 

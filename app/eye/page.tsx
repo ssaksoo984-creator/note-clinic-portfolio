@@ -10,8 +10,8 @@ import AftercareSlider from "../_components/sub/AftercareSlider";
 import FAQAccordion from "../_components/sub/FAQAccordion";
 
 export const metadata: Metadata = {
-  title: "눈성형 | 아르떼성형외과",
-  description: "개인의 눈매와 얼굴 비율을 고려한 아르떼성형외과의 맞춤 눈성형",
+  title: "눈성형 | ARTE 성형외과",
+  description: "개인의 눈매와 얼굴 비율을 고려한 ARTE 성형외과의 맞춤 눈성형",
 };
 
 const methods = [
@@ -120,7 +120,7 @@ const career = [
   "대한미용성형외과학회 정회원",
   "○○대학교 의과대학 졸업",
   "○○대학병원 성형외과 수련",
-  "아르떼성형외과 대표원장",
+  "ARTE 성형외과 대표원장",
 ];
 
 const faqs = [
@@ -157,7 +157,7 @@ export default function EyePage() {
 
       <TreatmentIntro
         title="눈매 하나로, 인상 전체가 달라집니다"
-        description="아르떼성형외과는 개인의 눈매와 얼굴 비율을 고려한 자연스러운 눈성형을 지향합니다. 과도한 절개보다 최소한의 개입으로, 원래 그런 눈매였던 것처럼 자연스러운 결과를 완성합니다."
+        description="ARTE 성형외과는 개인의 눈매와 얼굴 비율을 고려한 자연스러운 눈성형을 지향합니다. 과도한 절개보다 최소한의 개입으로, 원래 그런 눈매였던 것처럼 자연스러운 결과를 완성합니다."
         image="/clients/note-clinic/images/treatments/eye-hover.jpg"
         imageAlt="눈성형 상담 이미지"
         points={[
@@ -189,7 +189,7 @@ export default function EyePage() {
       />
 
       <AftercareSlider
-        title="아르떼만의 사후관리"
+        title="ARTE만의 사후관리"
         subtitle="AFTERCARE"
         items={aftercareItems}
       />

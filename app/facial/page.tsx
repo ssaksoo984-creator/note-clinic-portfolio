@@ -10,8 +10,8 @@ import AftercareSlider from "../_components/sub/AftercareSlider";
 import FAQAccordion from "../_components/sub/FAQAccordion";
 
 export const metadata: Metadata = {
-  title: "안면윤곽 | 아르떼성형외과",
-  description: "광대·사각턱·턱끝의 균형을 고려한 아르떼성형외과의 맞춤 안면윤곽",
+  title: "안면윤곽 | ARTE 성형외과",
+  description: "광대·사각턱·턱끝의 균형을 고려한 ARTE 성형외과의 맞춤 안면윤곽",
 };
 
 const methods = [
@@ -90,7 +90,7 @@ const career = [
   "대한미용성형외과학회 정회원",
   "○○대학교 의과대학 졸업",
   "○○대학병원 성형외과 수련",
-  "아르떼성형외과 대표원장",
+  "ARTE 성형외과 대표원장",
 ];
 
 const aftercareItems = [
@@ -153,7 +153,7 @@ export default function FacialPage() {
 
       <TreatmentIntro
         title="얼굴선 하나로, 전체 인상이 갸름해집니다"
-        description="아르떼성형외과는 광대·사각턱·턱끝의 균형을 함께 고려한 안면윤곽 수술을 지향합니다. 단순히 뼈를 깎는 것이 아니라, 신경과 근육의 위치를 세심하게 살펴 안전하고 자연스러운 라인을 완성합니다."
+        description="ARTE 성형외과는 광대·사각턱·턱끝의 균형을 함께 고려한 안면윤곽 수술을 지향합니다. 단순히 뼈를 깎는 것이 아니라, 신경과 근육의 위치를 세심하게 살펴 안전하고 자연스러운 라인을 완성합니다."
         image="/clients/note-clinic/images/treatments/facial-hover.jpg"
         imageAlt="안면윤곽 상담 이미지"
         points={[
@@ -185,7 +185,7 @@ export default function FacialPage() {
       />
 
       <AftercareSlider
-        title="아르떼만의 사후관리"
+        title="ARTE만의 사후관리"
         subtitle="AFTERCARE"
         items={aftercareItems}
       />
