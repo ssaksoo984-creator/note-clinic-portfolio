@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
+import type { Swiper as SwiperClass } from "swiper/types";
 import SectionTitle from "../ui/SectionTitle";
 import ParticleNetwork from "../ui/ParticleNetwork";
 import type { ProcessStep } from "../../_data/process";
@@ -26,6 +27,8 @@ export default function ProcessSection({
 }: ProcessSectionProps) {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [mobileActive, setMobileActive] = useState(0);
+  const mobileSwiperRef = useRef<SwiperClass | null>(null);
   const { ref: sectionRef, inView: sectionInView } = useInView({ threshold: 0.3 });
 
   useEffect(() => {
@@ -118,8 +121,48 @@ export default function ProcessSection({
 
         {/* 모바일 — 좌우 스와이프 슬라이드 */}
         <div className="mt-16 lg:hidden">
+          {/* 진행 표시 — 점 위에 숫자, 클릭하면 해당 단계로 이동 */}
+          <div className="relative flex items-start justify-between mb-8 px-4">
+            <div className="absolute left-4 right-4 top-[22px] h-px bg-rule" />
+            <div
+              className="absolute left-4 top-[22px] h-px bg-gold transition-all duration-500 ease-out"
+              style={{
+                width:
+                  steps.length > 1
+                    ? `calc(${(mobileActive / (steps.length - 1)) * 100}% - ${
+                        (mobileActive / (steps.length - 1)) * 32
+                      }px)`
+                    : "0px",
+              }}
+            />
+            {steps.map((s, i) => (
+              <button
+                key={s.step}
+                onClick={() => mobileSwiperRef.current?.slideToLoop(i)}
+                className="relative z-10 flex flex-col items-center gap-2"
+              >
+                <span
+                  className={`font-serif text-[11px] tracking-widest transition-colors duration-300 ${
+                    mobileActive === i ? "text-gold" : "text-dim"
+                  }`}
+                >
+                  {s.step}
+                </span>
+                <span
+                  className={`block w-2.5 h-2.5 rounded-full border transition-colors duration-300 ${
+                    mobileActive === i ? "bg-gold border-gold" : "bg-canvas border-rule"
+                  }`}
+                />
+              </button>
+            ))}
+          </div>
+
           <Swiper
             modules={[Autoplay]}
+            onSwiper={(s) => {
+              mobileSwiperRef.current = s;
+            }}
+            onSlideChange={(s) => setMobileActive(s.realIndex)}
             slidesPerView={1}
             spaceBetween={16}
             autoplay={{ delay: AUTOPLAY_MS, disableOnInteraction: false }}

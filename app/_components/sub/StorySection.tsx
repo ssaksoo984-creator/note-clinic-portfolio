@@ -100,7 +100,7 @@ export default function StorySection({
     <section className="bg-canvas">
       {/* 전체가 한 화면(sticky) 안에서: 타이틀 -> 3D 큐브 -> 풀스크린 이미지 -> 타이틀+3카드 */}
       <div ref={wrapRef} className="relative h-[320vh]">
-        <div className="sticky top-0 h-screen overflow-hidden bg-canvas">
+        <div className="sticky top-0 h-[100dvh] overflow-hidden bg-canvas">
           {/* 큐브 뒤 배경 마퀴 텍스트 */}
           <motion.div
             style={{ opacity: cubeOpacity }}
@@ -179,12 +179,15 @@ export default function StorySection({
           />
 
           {/* 최종 콘텐츠 — 타이틀 등장 후, 카드가 1·2·3 순서대로 페이드인 */}
-          <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6">
-            <motion.div style={{ opacity: titleOpacity, y: titleY }}>
+          <div className="absolute inset-0 z-10 flex flex-col items-center justify-start md:justify-center overflow-y-auto px-6 pt-16 pb-10 md:py-20">
+            <motion.div
+              style={{ opacity: titleOpacity, y: titleY }}
+              className="shrink-0 scale-[0.7] sm:scale-90 md:scale-100"
+            >
               <SectionTitle en={subtitle} ko={title} center light />
             </motion.div>
 
-            <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 w-full max-w-[1200px]">
+            <div className="mt-6 md:mt-10 grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 w-full max-w-[1200px] shrink-0">
               {points.map((p, i) => (
                 <motion.div
                   key={p.number}
