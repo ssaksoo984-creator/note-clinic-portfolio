@@ -98,7 +98,7 @@ export default function BeforeAfterSection() {
             onPointerMove={handlePointerMove}
             onPointerUp={handlePointerUp}
             onPointerLeave={handlePointerUp}
-            className="group relative h-[420px] sm:h-[480px] md:h-[560px] overflow-hidden touch-none select-none cursor-ew-resize"
+            className="group order-2 lg:order-1 relative h-[420px] sm:h-[480px] md:h-[560px] overflow-hidden touch-none select-none cursor-ew-resize"
           >
             {/* AFTER — 바닥 레이어 */}
             <div
@@ -135,8 +135,8 @@ export default function BeforeAfterSection() {
             </div>
           </div>
 
-          {/* 우측 — 카운터 / 타이틀 / 설명 / 버튼 / 화살표 */}
-          <div className="flex flex-col">
+          {/* 우측 — 카운터 / 타이틀 / 설명 / 버튼 / 화살표 (모바일에서는 사진보다 먼저 표시) */}
+          <div className="order-1 lg:order-2 flex flex-col">
             <div className="flex items-baseline gap-2">
               <span className="font-serif text-ink text-4xl leading-none">
                 {String(active + 1).padStart(2, "0")}

@@ -91,6 +91,10 @@ export default function StorySection({
   const card2Opacity = useTransform(scrollYProgress, [0.79, 0.85], [0, 1]);
   const card3Opacity = useTransform(scrollYProgress, [0.85, 0.91], [0, 1]);
   const cardOpacities = [card1Opacity, card2Opacity, card3Opacity];
+  const card1Y = useTransform(scrollYProgress, [0.73, 0.79], [-32, 0]);
+  const card2Y = useTransform(scrollYProgress, [0.79, 0.85], [-32, 0]);
+  const card3Y = useTransform(scrollYProgress, [0.85, 0.91], [-32, 0]);
+  const cardYs = [card1Y, card2Y, card3Y];
 
   return (
     <section className="bg-canvas">
@@ -184,7 +188,7 @@ export default function StorySection({
               {points.map((p, i) => (
                 <motion.div
                   key={p.number}
-                  style={{ opacity: cardOpacities[i] }}
+                  style={{ opacity: cardOpacities[i], y: cardYs[i] }}
                   className="group relative p-6 overflow-hidden"
                   onMouseEnter={() => cardSvgRefs.current[i]?.pauseAnimations()}
                   onMouseLeave={() => cardSvgRefs.current[i]?.unpauseAnimations()}

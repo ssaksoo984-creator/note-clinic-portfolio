@@ -3,9 +3,12 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
 import SectionTitle from "../ui/SectionTitle";
 import ParticleNetwork from "../ui/ParticleNetwork";
 import type { ProcessStep } from "../../_data/process";
+import "swiper/css";
 
 interface ProcessSectionProps {
   title: string;
@@ -113,27 +116,33 @@ export default function ProcessSection({
           </div>
         </div>
 
-        {/* 모바일 — 순차 스택형 */}
-        <div className="mt-16 flex flex-col gap-16 lg:hidden">
-          {steps.map((s, i) => (
-            <motion.div
-              key={s.step}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1], delay: i * 0.08 }}
-              className={i > 0 ? "pt-16 border-t border-rule" : ""}
-            >
-              <span className="font-serif text-gold text-sm tracking-[0.3em]">
-                {s.step}
-              </span>
-              <div className="relative w-full max-w-xs mx-auto mt-4 aspect-[480/520] border-2 border-gold bg-rule" />
-              <h3 className="mt-5 font-serif-ko text-ink text-2xl font-light leading-snug">
-                {s.title}
-              </h3>
-              <p className="mt-3 text-dim text-sm leading-relaxed">{s.description}</p>
-            </motion.div>
-          ))}
+        {/* 모바일 — 좌우 스와이프 슬라이드 */}
+        <div className="mt-16 lg:hidden">
+          <Swiper
+            modules={[Autoplay]}
+            slidesPerView={1}
+            spaceBetween={16}
+            autoplay={{ delay: AUTOPLAY_MS, disableOnInteraction: false }}
+            loop
+          >
+            {steps.map((s, i) => (
+              <SwiperSlide key={s.step}>
+                <div className="px-1">
+                  <span className="font-serif text-gold text-sm tracking-[0.3em]">
+                    {s.step}
+                  </span>
+                  <div
+                    className="relative w-full max-w-xs mx-auto mt-4 aspect-[480/520] border-2 border-gold"
+                    style={{ backgroundColor: PLACEHOLDER_COLORS[i % PLACEHOLDER_COLORS.length] }}
+                  />
+                  <h3 className="mt-5 font-serif-ko text-ink text-2xl font-bold leading-snug">
+                    {s.title}
+                  </h3>
+                  <p className="mt-3 text-dim text-sm leading-relaxed">{s.description}</p>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </div>
     </section>
