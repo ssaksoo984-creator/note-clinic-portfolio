@@ -27,7 +27,7 @@ export default function Home() {
       />
       <HospitalGallery />
       <LocationSection />
-      <ConsultCTA />
+      <ConsultCTA bg />
     </>
   );
 }

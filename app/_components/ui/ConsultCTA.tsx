@@ -2,24 +2,42 @@
 
 import { motion } from "framer-motion";
 import Button from "./Button";
+import SafeImage from "./SafeImage";
 
 interface ConsultCTAProps {
   title?: string;
   subtitle?: string;
+  bg?: boolean;
 }
+
+const CONTACT_BG = "/clients/note-clinic/images/home_contact/contact_bg.png";
 
 export default function ConsultCTA({
   title = "자연스러운 변화의 시작",
   subtitle = "전문 의료진과의 1:1 무료 상담을 통해\n당신만의 아름다움을 설계해 드립니다.",
+  bg = false,
 }: ConsultCTAProps) {
   return (
-    <section className="bg-night py-24 px-6">
+    <section className="relative overflow-hidden bg-night py-24 px-6">
+      {bg && (
+        <>
+          <SafeImage
+            src={CONTACT_BG}
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-night/70" />
+        </>
+      )}
+
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.9, ease: "easeOut" }}
-        className="max-w-2xl mx-auto text-center"
+        className="relative z-10 max-w-2xl mx-auto text-center"
       >
         <p className="font-serif text-gold text-xs tracking-[0.35em] mb-5">
           CONSULTATION
