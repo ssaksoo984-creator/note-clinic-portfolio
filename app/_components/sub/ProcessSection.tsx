@@ -1,15 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
-import type { Swiper as SwiperClass } from "swiper/types";
 import SectionTitle from "../ui/SectionTitle";
 import ParticleNetwork from "../ui/ParticleNetwork";
 import type { ProcessStep } from "../../_data/process";
-import "swiper/css";
 
 interface ProcessSectionProps {
   title: string;
@@ -27,8 +23,6 @@ export default function ProcessSection({
 }: ProcessSectionProps) {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
-  const [mobileActive, setMobileActive] = useState(0);
-  const mobileSwiperRef = useRef<SwiperClass | null>(null);
   const { ref: sectionRef, inView: sectionInView } = useInView({ threshold: 0.3 });
 
   useEffect(() => {
@@ -44,8 +38,10 @@ export default function ProcessSection({
       ref={sectionRef}
       className="relative overflow-hidden py-20 md:py-32 px-6 bg-canvas"
     >
-      {/* 배경 파티클 네트워크 — 점들이 떠다니며 가까워지면 선으로 연결되는 효과 */}
-      <ParticleNetwork />
+      {/* 배경 파티클 네트워크 — 점들이 떠다니며 가까워지면 선으로 연결되는 효과 (PC 전용) */}
+      <div className="hidden md:block">
+        <ParticleNetwork />
+      </div>
 
       <div className="relative max-w-[1440px] mx-auto">
         <SectionTitle en={subtitle} ko={title} center />
@@ -119,73 +115,30 @@ export default function ProcessSection({
           </div>
         </div>
 
-        {/* 모바일 — 좌우 스와이프 슬라이드 */}
-        <div className="mt-16 lg:hidden">
-          {/* 진행 표시 — 점 위에 숫자, 클릭하면 해당 단계로 이동 */}
-          <div className="relative flex items-start justify-between mb-8 px-4">
-            <div className="absolute left-4 right-4 top-[22px] h-px bg-rule" />
-            <div
-              className="absolute left-4 top-[22px] h-px bg-gold transition-all duration-500 ease-out"
-              style={{
-                width:
-                  steps.length > 1
-                    ? `calc(${(mobileActive / (steps.length - 1)) * 100}% - ${
-                        (mobileActive / (steps.length - 1)) * 32
-                      }px)`
-                    : "0px",
-              }}
-            />
-            {steps.map((s, i) => (
-              <button
-                key={s.step}
-                onClick={() => mobileSwiperRef.current?.slideToLoop(i)}
-                className="relative z-10 flex flex-col items-center gap-2"
-              >
-                <span
-                  className={`font-serif text-[11px] tracking-widest transition-colors duration-300 ${
-                    mobileActive === i ? "text-gold" : "text-dim"
-                  }`}
-                >
-                  {s.step}
-                </span>
-                <span
-                  className={`block w-2.5 h-2.5 rounded-full border transition-colors duration-300 ${
-                    mobileActive === i ? "bg-gold border-gold" : "bg-canvas border-rule"
-                  }`}
-                />
-              </button>
-            ))}
-          </div>
-
-          <Swiper
-            modules={[Autoplay]}
-            onSwiper={(s) => {
-              mobileSwiperRef.current = s;
-            }}
-            onSlideChange={(s) => setMobileActive(s.realIndex)}
-            slidesPerView={1}
-            spaceBetween={16}
-            autoplay={{ delay: AUTOPLAY_MS, disableOnInteraction: false }}
-            loop
-          >
-            {steps.map((s, i) => (
-              <SwiperSlide key={s.step}>
-                <div className="px-1">
-                  <span className="font-serif text-gold text-sm tracking-[0.3em]">
-                    {s.step}
-                  </span>
-                  <div
-                    className="relative w-full max-w-xs mx-auto mt-4 aspect-[480/520] border-2 border-gold"
-                    style={{ backgroundColor: PLACEHOLDER_COLORS[i % PLACEHOLDER_COLORS.length] }}
-                  />
-                  <h3 className="mt-5 font-serif-ko text-ink text-2xl font-bold leading-snug">
-                    {s.title}
-                  </h3>
-                  <p className="mt-3 text-dim text-sm leading-relaxed">{s.description}</p>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+        {/* 모바일 — 세로 스크롤형, 해당 단계에 도달하면 사진+내용이 나타남 */}
+        <div className="mt-16 flex flex-col gap-16 lg:hidden">
+          {steps.map((s, i) => (
+            <motion.div
+              key={s.step}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+              className={i > 0 ? "pt-16 border-t border-rule" : ""}
+            >
+              <span className="font-serif text-gold text-sm tracking-[0.3em]">
+                {s.step}
+              </span>
+              <div
+                className="relative w-full max-w-xs mx-auto mt-4 aspect-[480/520] border-2 border-gold"
+                style={{ backgroundColor: PLACEHOLDER_COLORS[i % PLACEHOLDER_COLORS.length] }}
+              />
+              <h3 className="mt-5 font-serif-ko text-ink text-2xl font-bold leading-snug">
+                {s.title}
+              </h3>
+              <p className="mt-3 text-dim text-sm leading-relaxed">{s.description}</p>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
