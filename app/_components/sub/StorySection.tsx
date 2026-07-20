@@ -21,16 +21,18 @@ interface StorySectionProps {
 
 const CUBE_SIZE = 220;
 const HALF = CUBE_SIZE / 2;
-const FRONT_IMG = "/clients/note-clinic/images/hero/eventbanner_01_face.png";
+const STORY_IMG = "/clients/note-clinic/images/story";
+const FRONT_IMG = `${STORY_IMG}/cube_1.png`;
+const BG_IMG = `${STORY_IMG}/cube_1_full.png`;
 const MARQUEE_TEXT = "ARTE · PERFECT SATISFACTION · ";
 
 const cubeFaces = [
   { key: "front", src: FRONT_IMG, transform: `translateZ(${HALF}px)` },
-  { key: "back", src: "/clients/note-clinic/images/treatments/eye-default.jpg", transform: `rotateY(180deg) translateZ(${HALF}px)` },
-  { key: "right", src: "/clients/note-clinic/images/treatments/nose-default.jpg", transform: `rotateY(90deg) translateZ(${HALF}px)` },
-  { key: "left", src: "/clients/note-clinic/images/treatments/facial-default.jpg", transform: `rotateY(-90deg) translateZ(${HALF}px)` },
-  { key: "top", src: "/clients/note-clinic/images/treatments/breast-default.jpg", transform: `rotateX(90deg) translateZ(${HALF}px)` },
-  { key: "bottom", src: "/clients/note-clinic/images/treatments/anti-aging-default.jpg", transform: `rotateX(-90deg) translateZ(${HALF}px)` },
+  { key: "back", src: `${STORY_IMG}/cube_2.png`, transform: `rotateY(180deg) translateZ(${HALF}px)` },
+  { key: "right", src: `${STORY_IMG}/cube_3.png`, transform: `rotateY(90deg) translateZ(${HALF}px)` },
+  { key: "left", src: `${STORY_IMG}/cube_4.png`, transform: `rotateY(-90deg) translateZ(${HALF}px)` },
+  { key: "top", src: `${STORY_IMG}/cube_5.png`, transform: `rotateX(90deg) translateZ(${HALF}px)` },
+  { key: "bottom", src: `${STORY_IMG}/cube_6.png`, transform: `rotateX(-90deg) translateZ(${HALF}px)` },
 ];
 
 export default function StorySection({
@@ -178,7 +180,7 @@ export default function StorySection({
                 style={{ opacity: flatOpacity, width: flatSize, height: flatHeight }}
               >
                 <SafeImage
-                  src={FRONT_IMG}
+                  src={BG_IMG}
                   alt=""
                   fill
                   sizes="100vw"
