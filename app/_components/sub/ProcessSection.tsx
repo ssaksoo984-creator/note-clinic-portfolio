@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import SectionTitle from "../ui/SectionTitle";
+import SafeImage from "../ui/SafeImage";
 import ParticleNetwork from "../ui/ParticleNetwork";
 import type { ProcessStep } from "../../_data/process";
 
@@ -14,7 +15,13 @@ interface ProcessSectionProps {
 }
 
 const AUTOPLAY_MS = 4200;
-const PLACEHOLDER_COLORS = ["#e5e5e5", "#e8dcc8", "#d8c9ae", "#cbb896"];
+const PROCESS_IMG = "/clients/note-clinic/images/home_process";
+const processImages = [
+  `${PROCESS_IMG}/process_01.png`,
+  `${PROCESS_IMG}/process_02.png`,
+  `${PROCESS_IMG}/process_03.png`,
+  `${PROCESS_IMG}/process_04.png`,
+];
 
 export default function ProcessSection({
   title,
@@ -85,9 +92,12 @@ export default function ProcessSection({
 
           <div>
             <div className="relative w-[480px] h-[520px] border-2 border-gold overflow-hidden">
-              <div
-                className="absolute inset-0"
-                style={{ backgroundColor: PLACEHOLDER_COLORS[active % PLACEHOLDER_COLORS.length] }}
+              <SafeImage
+                src={processImages[active % processImages.length]}
+                alt={steps[active].title}
+                fill
+                sizes="480px"
+                className="object-cover"
               />
             </div>
           </div>
@@ -129,10 +139,15 @@ export default function ProcessSection({
               <span className="font-serif text-gold text-sm tracking-[0.3em]">
                 {s.step}
               </span>
-              <div
-                className="relative w-full max-w-xs mx-auto mt-4 aspect-[480/520] border-2 border-gold"
-                style={{ backgroundColor: PLACEHOLDER_COLORS[i % PLACEHOLDER_COLORS.length] }}
-              />
+              <div className="relative w-full max-w-xs mx-auto mt-4 aspect-[480/520] border-2 border-gold overflow-hidden">
+                <SafeImage
+                  src={processImages[i % processImages.length]}
+                  alt={s.title}
+                  fill
+                  sizes="320px"
+                  className="object-cover"
+                />
+              </div>
               <h3 className="mt-5 font-serif-ko text-ink text-2xl font-bold leading-snug">
                 {s.title}
               </h3>
