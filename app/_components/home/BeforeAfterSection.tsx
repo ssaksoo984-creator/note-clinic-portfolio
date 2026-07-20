@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useRef, useState, type MouseEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import SectionTitle from "../ui/SectionTitle";
 import SafeImage from "../ui/SafeImage";
@@ -100,11 +100,19 @@ export default function BeforeAfterSection() {
             onPointerMove={handlePointerMove}
             onPointerUp={handlePointerUp}
             onPointerLeave={handlePointerUp}
+            onContextMenu={(e: MouseEvent) => e.preventDefault()}
             className="group order-2 lg:order-1 relative h-[420px] sm:h-[480px] md:h-[560px] overflow-hidden touch-none select-none cursor-ew-resize"
           >
             {/* AFTER — 바닥 레이어 */}
             <div className="absolute inset-0">
-              <SafeImage src={item.after} alt={`${item.label} after`} fill sizes="(max-width: 1024px) 100vw, 60vw" className="object-cover" />
+              <SafeImage
+                src={item.after}
+                alt={`${item.label} after`}
+                fill
+                draggable={false}
+                sizes="(max-width: 1024px) 100vw, 60vw"
+                className="object-cover pointer-events-none [-webkit-user-drag:none]"
+              />
               <div className="absolute bottom-5 right-5 bg-ink/70 px-3 py-1">
                 <span className="font-serif text-canvas text-[10px] tracking-[0.3em]">AFTER</span>
               </div>
@@ -115,7 +123,14 @@ export default function BeforeAfterSection() {
               className="absolute inset-0"
               style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}
             >
-              <SafeImage src={item.before} alt={`${item.label} before`} fill sizes="(max-width: 1024px) 100vw, 60vw" className="object-cover" />
+              <SafeImage
+                src={item.before}
+                alt={`${item.label} before`}
+                fill
+                draggable={false}
+                sizes="(max-width: 1024px) 100vw, 60vw"
+                className="object-cover pointer-events-none [-webkit-user-drag:none]"
+              />
               <div className="absolute bottom-5 left-5 bg-canvas/80 px-3 py-1">
                 <span className="font-serif text-ink text-[10px] tracking-[0.3em]">BEFORE</span>
               </div>
