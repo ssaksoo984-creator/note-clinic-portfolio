@@ -39,7 +39,7 @@ export default function ProcessSection({
       className="relative overflow-hidden py-20 md:py-32 px-6 bg-canvas"
     >
       {/* 배경 파티클 네트워크 — 점들이 떠다니며 가까워지면 선으로 연결되는 효과 (PC 전용) */}
-      <div className="hidden md:block">
+      <div className="hidden md:block absolute inset-0">
         <ParticleNetwork />
       </div>
 
