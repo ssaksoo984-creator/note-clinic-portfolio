@@ -15,7 +15,7 @@ const CONTACT_BG = "/clients/note-clinic/images/home_contact/contact_bg.png";
 export default function ConsultCTA({
   title = "자연스러운 변화의 시작",
   subtitle = "전문 의료진과의 1:1 무료 상담을 통해\n당신만의 아름다움을 설계해 드립니다.",
-  bg = false,
+  bg = true,
 }: ConsultCTAProps) {
   return (
     <section className="relative overflow-hidden bg-night py-24 px-6">

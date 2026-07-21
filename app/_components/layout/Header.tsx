@@ -9,6 +9,7 @@ import { languages } from "../../_data/languages";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const navText = scrolled ? "text-ink" : "text-canvas";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 4);
@@ -30,7 +31,7 @@ export default function Header() {
         {/* 로고 */}
         <Link
           href="/"
-          className="font-serif text-xl tracking-[0.25em] text-ink hover:text-gold transition-colors"
+          className={`font-serif text-xl tracking-[0.25em] hover:text-gold transition-colors ${navText}`}
         >
           ARTE
         </Link>
@@ -39,7 +40,7 @@ export default function Header() {
         <nav className="hidden md:flex items-center gap-8">
           {/* 병원소개 드롭다운 */}
           <div className="relative group">
-            <span className="cursor-default text-sm tracking-widest text-ink group-hover:text-gold transition-colors select-none">
+            <span className={`cursor-default text-sm tracking-widest group-hover:text-gold transition-colors select-none ${navText}`}>
               병원소개
             </span>
             <div className="absolute top-full left-1/2 -translate-x-1/2 pt-5 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200">
@@ -60,7 +61,7 @@ export default function Header() {
           {/* 시술 카테고리 드롭다운 (눈성형/코성형/안면윤곽/가슴성형) */}
           {treatmentNav.map((group) => (
             <div key={group.href} className="relative group">
-              <span className="cursor-default text-sm tracking-widest text-ink group-hover:text-gold transition-colors select-none">
+              <span className={`cursor-default text-sm tracking-widest group-hover:text-gold transition-colors select-none ${navText}`}>
                 {group.label}
               </span>
               <div className="absolute top-full left-1/2 -translate-x-1/2 pt-5 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200">
@@ -83,13 +84,13 @@ export default function Header() {
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm tracking-widest text-ink hover:text-gold transition-colors"
+              className={`text-sm tracking-widest hover:text-gold transition-colors ${navText}`}
             >
               {item.label}
             </Link>
           ))}
 
-          <LanguageSwitcher languages={languages} />
+          <LanguageSwitcher languages={languages} light={!scrolled} />
         </nav>
 
         {/* 모바일 메뉴 */}

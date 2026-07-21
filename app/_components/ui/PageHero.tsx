@@ -18,7 +18,7 @@ export default function PageHero({ en, title, description }: PageHeroProps) {
         sizes="100vw"
         className="object-cover"
       />
-      <div className="absolute inset-0 bg-night/70" />
+      <div className="absolute inset-0 bg-night/40" />
 
       {en && (
         <p className="font-serif text-gold text-xs tracking-[0.35em] mb-5">

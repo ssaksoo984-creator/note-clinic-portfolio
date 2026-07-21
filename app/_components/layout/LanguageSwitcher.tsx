@@ -5,9 +5,10 @@ import type { LanguageOption } from "../../_data/languages";
 
 interface LanguageSwitcherProps {
   languages: LanguageOption[];
+  light?: boolean;
 }
 
-export default function LanguageSwitcher({ languages }: LanguageSwitcherProps) {
+export default function LanguageSwitcher({ languages, light = false }: LanguageSwitcherProps) {
   const [open, setOpen] = useState(false);
   const [current, setCurrent] = useState(languages[0]);
 
@@ -16,7 +17,9 @@ export default function LanguageSwitcher({ languages }: LanguageSwitcherProps) {
       <button
         onClick={() => setOpen((v) => !v)}
         aria-label="언어 선택"
-        className="flex items-center justify-center text-ink hover:text-gold transition-colors"
+        className={`flex items-center justify-center hover:text-gold transition-colors ${
+          light ? "text-canvas" : "text-ink"
+        }`}
       >
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
           <circle cx="12" cy="12" r="9" />
