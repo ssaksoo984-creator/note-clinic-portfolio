@@ -43,7 +43,7 @@ export default function ProcessSection({
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden py-20 md:py-32 px-6 bg-canvas"
+      className="relative overflow-hidden py-20 md:py-32 px-6 bg-night"
     >
       {/* 배경 파티클 네트워크 — 점들이 떠다니며 가까워지면 선으로 연결되는 효과 (PC 전용) */}
       <div className="hidden md:block absolute inset-0">
@@ -51,7 +51,7 @@ export default function ProcessSection({
       </div>
 
       <div className="relative max-w-[1440px] mx-auto">
-        <SectionTitle en={subtitle} ko={title} center />
+        <SectionTitle en={subtitle} ko={title} center light />
 
         {/* 데스크탑 — 리스트 / 이미지 / 텍스트 3단, 자동재생+클릭+호버 연동 */}
         <div className="mt-20 hidden lg:grid grid-cols-[1fr_auto_1fr] items-center gap-16">
@@ -71,7 +71,7 @@ export default function ProcessSection({
                 >
                   <span
                     className={`font-serif tracking-[0.2em] transition-all duration-300 ${
-                      isActive ? "text-gold text-sm" : "text-rule text-xs"
+                      isActive ? "text-gold text-sm" : "text-canvas/25 text-xs"
                     }`}
                   >
                     {s.step}
@@ -79,8 +79,8 @@ export default function ProcessSection({
                   <h3
                     className={`font-serif-ko transition-all duration-300 ${
                       isActive
-                        ? "text-ink font-semibold text-2xl md:text-3xl"
-                        : "text-dim/50 font-light text-base md:text-lg"
+                        ? "text-canvas font-semibold text-2xl md:text-3xl"
+                        : "text-canvas/40 font-light text-base md:text-lg"
                     }`}
                   >
                     {s.title}
@@ -114,10 +114,10 @@ export default function ProcessSection({
                 <span className="block font-serif text-gold/25 text-[160px] leading-none select-none">
                   {steps[active].step}
                 </span>
-                <h3 className="mt-3 font-serif-ko text-ink text-2xl md:text-3xl font-bold leading-snug mb-4">
+                <h3 className="mt-3 font-serif-ko text-canvas text-2xl md:text-3xl font-bold leading-snug mb-4">
                   {steps[active].title}
                 </h3>
-                <p className="text-dim text-sm md:text-base leading-relaxed max-w-sm">
+                <p className="text-canvas/60 text-sm md:text-base leading-relaxed max-w-sm">
                   {steps[active].description}
                 </p>
               </motion.div>
@@ -134,7 +134,7 @@ export default function ProcessSection({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-              className={i > 0 ? "pt-16 border-t border-rule" : ""}
+              className={i > 0 ? "pt-16 border-t border-canvas/15" : ""}
             >
               <span className="font-serif text-gold text-sm tracking-[0.3em]">
                 {s.step}
@@ -148,10 +148,10 @@ export default function ProcessSection({
                   className="object-cover"
                 />
               </div>
-              <h3 className="mt-5 font-serif-ko text-ink text-2xl font-bold leading-snug">
+              <h3 className="mt-5 font-serif-ko text-canvas text-2xl font-bold leading-snug">
                 {s.title}
               </h3>
-              <p className="mt-3 text-dim text-sm leading-relaxed">{s.description}</p>
+              <p className="mt-3 text-canvas/60 text-sm leading-relaxed">{s.description}</p>
             </motion.div>
           ))}
         </div>
