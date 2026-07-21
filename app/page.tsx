@@ -13,12 +13,15 @@ export default function Home() {
   return (
     <>
       <HeroSlider />
-      <TreatmentCards />
-      <ProcessSection
-        title="상담부터 사후관리까지"
-        subtitle="OUR PROCESS"
-        steps={processSteps}
-      />
+      {/* 진료분야가 고정되고 상담절차가 그 위로 슬라이드해 덮는 스택 효과 — 범위를 이 래퍼로 한정 */}
+      <div className="relative">
+        <TreatmentCards />
+        <ProcessSection
+          title="상담부터 사후관리까지"
+          subtitle="OUR PROCESS"
+          steps={processSteps}
+        />
+      </div>
       <BeforeAfterSection />
       <StorySection
         title="ARTE가 지켜온 약속"
