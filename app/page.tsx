@@ -20,6 +20,7 @@ export default function Home() {
           title="상담부터 사후관리까지"
           subtitle="OUR PROCESS"
           steps={processSteps}
+          variant="home"
         />
       </div>
       <BeforeAfterSection />
