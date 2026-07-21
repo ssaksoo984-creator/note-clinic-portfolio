@@ -65,7 +65,7 @@ export default function TreatmentCards() {
   };
 
   return (
-    <section className="relative w-full overflow-hidden bg-canvas py-24 md:py-32">
+    <section className="sticky top-0 z-0 w-full overflow-hidden bg-canvas py-24 md:py-32">
       {/* 배경 골드 그라데이션 원 — 스크롤 진입 시 피어나는 효과 */}
       <motion.div
         aria-hidden
