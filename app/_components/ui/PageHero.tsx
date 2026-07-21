@@ -1,12 +1,25 @@
+import SafeImage from "./SafeImage";
+
 interface PageHeroProps {
   en?: string;
   title: string;
   description?: string;
 }
 
+const SUB_BG = "/clients/note-clinic/images/sub_bg/sub_bg.png";
+
 export default function PageHero({ en, title, description }: PageHeroProps) {
   return (
-    <section className="bg-night flex flex-col items-center justify-center text-center py-32 px-6 min-h-[40vh]">
+    <section className="relative overflow-hidden bg-night flex flex-col items-center justify-center text-center py-32 px-6 min-h-[40vh]">
+      <SafeImage
+        src={SUB_BG}
+        alt=""
+        fill
+        sizes="100vw"
+        className="object-cover"
+      />
+      <div className="absolute inset-0 bg-night/70" />
+
       {en && (
         <p className="font-serif text-gold text-xs tracking-[0.35em] mb-5">
           {en}
